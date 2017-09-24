@@ -11,6 +11,7 @@ import { PasswordForgotComponent } from './components/password-forgot/password-f
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
+import { CustomerListService } from './services/customer-list.service';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -36,7 +37,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     MdButtonModule
   ],
-  providers: [],
+  providers: [CustomerListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
