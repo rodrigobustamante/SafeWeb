@@ -12,6 +12,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { CustomerListService } from './services/customer-list.service';
+import { LoadingModule } from 'ngx-loading';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    MdButtonModule
+    MdButtonModule,
+    LoadingModule
   ],
   providers: [CustomerListService],
   bootstrap: [AppComponent]
