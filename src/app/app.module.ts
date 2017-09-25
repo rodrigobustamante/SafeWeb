@@ -13,6 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { CustomerListService } from './services/customer-list.service';
 import { LoadingModule } from 'ngx-loading';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -37,7 +38,8 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes),
     MdButtonModule,
-    LoadingModule
+    LoadingModule,
+    FlashMessagesModule
   ],
   providers: [CustomerListService],
   bootstrap: [AppComponent]

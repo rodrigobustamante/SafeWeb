@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ export class LoginComponent implements OnInit {
 
   public loading = false;
 
-  constructor() { }
+  constructor(private message: FlashMessagesService) { }
 
   ngOnInit() {
   }
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     console.log('flag');
     setTimeout(()=> {
+      this.message.show('¡Inicio de sesión aún no implementado!', { cssClass: 'alert-warning', timeout: 5000 })
       this.loading = false;
     }, 5000)
   }
