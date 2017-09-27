@@ -1,3 +1,22 @@
-<p>
-  {{ data }}
-</p>
+<div class="container">
+  <table class="table table-resposive">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Rut</th>
+        <th>Nombre de fantasía</th>
+        <th>Dirección</th>
+        <th>Zona</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.rut }}</td>
+        <td>{{ user.address }}</td>
+        <td>{{ user.zone_name }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

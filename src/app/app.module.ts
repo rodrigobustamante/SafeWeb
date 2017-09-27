@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http } from '@angular/http';
 import { MdButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
@@ -11,9 +11,9 @@ import { PasswordForgotComponent } from './components/password-forgot/password-f
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
-import { CustomerListService } from './services/customer-list.service';
 import { LoadingModule } from 'ngx-loading';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -39,9 +39,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     MdButtonModule,
     LoadingModule,
-    FlashMessagesModule
+    FlashMessagesModule,
+    HttpClientModule
   ],
-  providers: [CustomerListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

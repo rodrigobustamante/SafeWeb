@@ -8,6 +8,6 @@ export class CustomerListService {
   constructor(private http:Http) { }
 
   getCustomers(){
-    return this.http.get('').map(res => res.json());
+    
   }
 }

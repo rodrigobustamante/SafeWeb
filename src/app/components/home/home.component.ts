@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment/moment';
 
@@ -11,9 +12,13 @@ export class HomeComponent implements OnInit {
 
   date: any;
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
-    this.date = moment().lang('es').format('DD MMMM YYYY')
-  }
+      if (localStorage.getItem("user") === null) {
+        this.router.navigate(['/login']);
+      }else{
+        this.date = moment().lang('es').format('DD MMMM YYYY')
+      }
+    }
 }
