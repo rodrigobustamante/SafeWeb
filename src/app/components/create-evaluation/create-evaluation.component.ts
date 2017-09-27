@@ -7,9 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateEvaluationComponent implements OnInit {
 
+  technical: String;
+  type: String;
+  customer: String;
+  date: String;
+  observation:String;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onSubmit(){
+    const evaluation = {
+      employee_id: this.technical,
+      evaluation_type_id: this.type,
+      date: this.date,
+      customer_id: this.customer,
+      observation: this.observation
+    }
+    console.log(evaluation)
   }
 
 }
