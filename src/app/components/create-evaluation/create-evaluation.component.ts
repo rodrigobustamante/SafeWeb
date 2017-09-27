@@ -27,5 +27,4 @@ export class CreateEvaluationComponent implements OnInit {
     }
     console.log(evaluation)
   }
-
 }

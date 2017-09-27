@@ -14,12 +14,14 @@ import { CustomerListComponent } from './components/customer-list/customer-list.
 import { LoadingModule } from 'ngx-loading';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpClientModule } from '@angular/common/http';
+import { CreateEvaluationComponent } from './components/create-evaluation/create-evaluation.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'recovery', component: PasswordForgotComponent},
-  {path: 'customers', component: CustomerListComponent}
+  {path: 'customers', component: CustomerListComponent},
+  {path: 'evaluations/create', component: CreateEvaluationComponent}
 ]
 
 
@@ -30,7 +32,8 @@ const appRoutes: Routes = [
     PasswordForgotComponent,
     NavbarComponent,
     HomeComponent,
-    CustomerListComponent
+    CustomerListComponent,
+    CreateEvaluationComponent
   ],
   imports: [
     BrowserModule,
