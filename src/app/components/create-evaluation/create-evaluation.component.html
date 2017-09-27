@@ -1,0 +1,41 @@
+<div class="container-fluid" style="margin-top: 50px;">
+  <div class="row justify-content-md-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title text-center">Ingresar evaluación</h2>
+        </div>
+        <div class="card-body">
+          <form (submit)="onSubmit()">
+            <div class="form-group">
+              <label for="technical">Técnico en terreno</label>
+              <input placeholder="John Doe" class="form-control" type="text" disabled>
+            </div>
+            <div class="form-group">
+              <label for="type">Tipo de evaluación</label>
+              <select [(ngModel)]="type" class="form-control" name="type" id="type">
+                <option>Seleccione un tipo de evaluación</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="customer">Nombre de la empresa</label>
+              <select [(ngModel)]="customer" class="form-control" name="customer" id="customer">
+                <option>Seleccione un tipo de evaluación</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="date">Fecha de la evaluación</label>
+              <input class="form-control" [(ngModel)]="date" name="date" id="date" type="date">
+            </div>
+            <div class="form-group">
+              <label for="observation">Observaciones</label>
+              <textarea class="form-control" [(ngModel)]="observation" name="observation" id="observation" rows="3"></textarea>
+            </div>
+            <button type="button" class="btn btn-lg btn-primary btn-block">Registrar</button>
+            <a class="btn btn-lg btn-primary btn-block" href="">Cancelar</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
