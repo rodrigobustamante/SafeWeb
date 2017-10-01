@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,18 +13,44 @@ export class LoginComponent implements OnInit {
   public loading = false;
   username: String;
   password: String;
-  constructor(private message: FlashMessagesService) { }
-
+  user:    any;
+  headers: any;
+  constructor(public http:HttpClient, private message: FlashMessagesService, private router: Router)
+  {
+    this.headers = new Headers();
+    this.headers.append('content-type', 'application/json');
+  }
   ngOnInit() {
+    if(localStorage.getItem('user') !== null){
+      this.router.navigate(['']);
+    }
   }
 
   onLogin(){
     this.loading = true;
-    console.log('flag');
-    setTimeout(()=> {
-      this.message.show(`¡Inicio de sesión aún no implementado!, ${this.username}`, { cssClass: 'alert-warning', timeout: 5000 })
+    const employee = {
+      username : this.username,
+      password : this.password
+    }
+    this.http.post("http://c3f1e6fc.ngrok.io/login", employee).subscribe(data => {
+      this.user = data['employee'];
       this.loading = false;
-    }, 5000)
+      console.log(this.user);
+      this.storeUser(this.user);
+      return this.router.navigate(['/']).then(() => {
+        this.message.show(`¡Usuario correcto!, ${this.user.firstName} ${this.user.lastName}`, { cssClass: 'alert-success', timeout: 5000 })
+      }).catch(err => {
+        this.message.show(`¡Error!. ${ err }`, { cssClass: 'alert-danger', timeout: 5000 })
+      })
+    }, err => {
+      this.message.show(`¡Error, usuario o contraseña incorrecto!`, { cssClass: 'alert-danger', timeout: 5000 })
+      console.log(err)
+      this.loading = false;
+    })
   }
 
+  storeUser(user){
+    localStorage.setItem('user', JSON.stringify(user))
+    this.user = user;
+  }
 }
