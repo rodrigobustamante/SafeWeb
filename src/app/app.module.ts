@@ -15,13 +15,14 @@ import { LoadingModule } from 'ngx-loading';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateEvaluationComponent } from './components/create-evaluation/create-evaluation.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'recovery', component: PasswordForgotComponent},
-  {path: 'customers', component: CustomerListComponent},
-  {path: 'evaluations/create', component: CreateEvaluationComponent}
+  {path: 'customers', component: CustomerListComponent, canActivate: [AuthGuard]},
+  {path: 'evaluations/create', component: CreateEvaluationComponent, canActivate: [AuthGuard]}
 ]
 
 
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
     FlashMessagesModule,
     HttpClientModule
   ],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

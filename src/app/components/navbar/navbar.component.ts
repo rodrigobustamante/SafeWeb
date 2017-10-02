@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { AuthGuard } from '../../guards/auth.guard';
 
 @Component({
   selector: 'navbar',
@@ -9,9 +10,16 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public route: Router, public message: FlashMessagesService) { }
+  public user: any;
+  public session: any;
+  constructor(public route: Router, public message: FlashMessagesService, public auth:AuthGuard) { }
 
   ngOnInit() {
+    if(localStorage.getItem('user') !== null){
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.session = true;
+      //console.log(this.user)
+    }
   }
 
   onLogout(){

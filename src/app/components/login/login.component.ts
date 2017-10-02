@@ -32,25 +32,27 @@ export class LoginComponent implements OnInit {
       username : this.username,
       password : this.password
     }
-    this.http.post("http://c3f1e6fc.ngrok.io/login", employee).subscribe(data => {
+    this.http.post("http://localhost:4567/login", employee).subscribe(data => {
       this.user = data['employee'];
       this.loading = false;
       console.log(this.user);
       this.storeUser(this.user);
-      return this.router.navigate(['/']).then(() => {
-        this.message.show(`¡Usuario correcto!, ${this.user.firstName} ${this.user.lastName}`, { cssClass: 'alert-success', timeout: 5000 })
-      }).catch(err => {
-        this.message.show(`¡Error!. ${ err }`, { cssClass: 'alert-danger', timeout: 5000 })
-      })
     }, err => {
-      this.message.show(`¡Error, usuario o contraseña incorrecto!`, { cssClass: 'alert-danger', timeout: 5000 })
+      this.message.show(`¡Error, usuario o contraseña incorrecto!`, 
+        { cssClass: 'alert-danger', timeout: 5000 })
       console.log(err)
       this.loading = false;
     })
   }
 
   storeUser(user){
-    localStorage.setItem('user', JSON.stringify(user))
     this.user = user;
+    localStorage.setItem('user', JSON.stringify(this.user))
+    return this.router.navigate(['']).then(() => {
+      this.message.show(`¡Usuario correcto! Bienvenido ${this.user.firstName} ${this.user.lastName}`, 
+        { cssClass: 'alert-success', timeout: 5000 })
+    }).catch(err => {
+      this.message.show(`¡Error!. ${ err }`, { cssClass: 'alert-danger', timeout: 5000 })
+    });
   }
 }
