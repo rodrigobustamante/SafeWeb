@@ -10,14 +10,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li *ngIf="session" class="nav-item active">
-          <a class="nav-link" href="#">Inicio</a>
+          <a class="nav-link" href="/">Inicio</a>
         </li>
         <li *ngIf="session" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="evaluations" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Evaluaciones</a>
           <div class="dropdown-menu" aria-labelledby="evaluations">
             <a class="dropdown-item" href="evaluations/create">Registrar evaluación</a>
             <a class="dropdown-item" href="evaluations">Listar evaluaciones</a>
-            <a class="dropdown-item" href="#">Something else here</a>
           </div>
         </li>
       </ul>

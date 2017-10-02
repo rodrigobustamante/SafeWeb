@@ -16,19 +16,21 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     if(localStorage.getItem('user') !== null){
-      this.user = JSON.parse(localStorage.getItem('user'));
+      this.user    = this.getSession();
       this.session = true;
-      //console.log(this.user)
     }
+  }
+
+  getSession(){
+    return JSON.parse(localStorage.getItem('user'));
   }
 
   onLogout(){
     localStorage.clear();
-    this.route.navigate(['']).then(()=> {
-      this.message.show(`Has cerrado sesión correctamente`, { cssClass: 'alert-success', timeout: 5000 })
+    this.route.navigate(['/login']).then(() => {
+      this.message.show(`Has cerrado sesión correctamente`, { cssClass: 'alert-success', timeout: 5000 });
     }).catch(err => {
-      this.message.show(`Error ${err}`, { cssClass: 'alert-danger', timeout: 5000 })
-    })
+      this.message.show(`Error: ${err}`, { cssClass: 'alert-danger', timeout: 5000 });
+    });
   }
-
 }

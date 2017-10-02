@@ -12,14 +12,14 @@ export class CustomerListComponent implements OnInit {
   constructor(public http:HttpClient) {
     this.headers = new Headers();
     this.headers.append('content-type', 'application/json');
-    this.test()
+    this.call()
   }
   
   ngOnInit() {
     
   }
   call(){
-    this.http.get("http://c3f1e6fc.ngrok.io/users").subscribe(data => {
+    this.http.get("http://localhost:4567/trainings").subscribe(data => {
       this.users = data['data']
       console.log(this.users)
     })

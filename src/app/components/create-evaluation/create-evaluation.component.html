@@ -9,18 +9,19 @@
           <form (submit)="onSubmit()">
             <div class="form-group">
               <label for="technical">Técnico en terreno</label>
-              <input [(ngModel)]="technical" name="technical" id="technical" placeholder="John Doe" value="1" class="form-control" type="text" disabled>
+              <input [(ngModel)]="technical" name="technical" id="technical" 
+              placeholder="{{ user.firstName }} {{ user.lastName }}" class="form-control" type="text" disabled>
             </div>
             <div class="form-group">
               <label for="type">Tipo de evaluación</label>
               <select [(ngModel)]="type" class="form-control" name="type" id="type">
-                <option>Seleccione un tipo de evaluación</option>
+                <option *ngFor="let type of types" value="{{ type.id }}">{{ type.type }}</option>
               </select>
             </div>
             <div class="form-group">
               <label for="customer">Nombre de la empresa</label>
               <select [(ngModel)]="customer" class="form-control" name="customer" id="customer">
-                <option>Seleccione empresa que evaluó</option>
+                <option *ngFor="let customer of customers" value="{{ customer.id }}">{{ customer.type }}</option>
               </select>
             </div>
             <div class="form-group">
