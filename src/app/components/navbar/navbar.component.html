@@ -9,10 +9,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li *ngIf="auth.loggedIn()" class="nav-item active">
+        <li *ngIf="session" class="nav-item active">
           <a class="nav-link" href="/">Inicio</a>
         </li>
-        <li *ngIf="auth.loggedIn()" class="nav-item dropdown">
+        <li *ngIf="session" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="evaluations" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Evaluaciones</a>
           <div class="dropdown-menu" aria-labelledby="evaluations">
             <a class="dropdown-item" href="evaluations/create">Registrar evaluación</a>
@@ -20,12 +20,12 @@
           </div>
         </li>
       </ul>
-      <ul *ngIf="auth.loggedIn()" class="navbar-nav pull-right">
+      <ul *ngIf="session" class="navbar-nav pull-right">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="auth.loggedIn()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="session" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{ user.firstName }} {{ user.lastName }}
           </a>
-          <div class="dropdown-menu" aria-labelledby="auth.loggedIn()">
+          <div class="dropdown-menu" aria-labelledby="session">
             <a (click)="onLogout()" class="dropdown-item" href="/">Cerrar sesión</a>
           </div>
         </li>
