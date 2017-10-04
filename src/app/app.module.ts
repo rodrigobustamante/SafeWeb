@@ -16,6 +16,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateEvaluationComponent } from './components/create-evaluation/create-evaluation.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AuthService } from './services/auth/auth.service';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
@@ -44,9 +45,10 @@ const appRoutes: Routes = [
     MdButtonModule,
     LoadingModule,
     FlashMessagesModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
