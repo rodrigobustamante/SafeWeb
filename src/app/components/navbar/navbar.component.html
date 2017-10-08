@@ -19,6 +19,12 @@
             <a class="dropdown-item" href="evaluations">Listar evaluaciones</a>
           </div>
         </li>
+        <li *ngIf="session" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="customers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empresas</a>
+          <div class="dropdown-menu" aria-labelledby="customers">
+            <a class="dropdown-item" href="customers">Listar empresas</a>
+          </div>
+        </li>
       </ul>
       <ul *ngIf="session" class="navbar-nav pull-right">
         <li class="nav-item dropdown">

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
 @Component({
   selector: 'app-password-forgot',
   templateUrl: './password-forgot.component.html',
