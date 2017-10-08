@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CreateEvaluationComponent } from './components/create-evaluation/create-evaluation.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth/auth.service';
+import { DataTablesModule } from 'angular-datatables';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
     LoadingModule,
     FlashMessagesModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    DataTablesModule
   ],
   providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
