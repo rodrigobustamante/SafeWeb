@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { EvaluationCreateService } from './../../../services/evaluation/evaluation-create.service';
 
 @Component({
   selector: 'app-create-evaluation',
@@ -15,25 +16,26 @@ export class CreateEvaluationComponent implements OnInit {
   customer: String;
   date: String;
   observation:String;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private create:EvaluationCreateService) { }
 
   ngOnInit() {
     if(localStorage.getItem('user') !== null){
       this.user = JSON.parse(localStorage.getItem('user'));
+      console.log(this.user.id)
       this.getTypes();
       this.getCustomers();
     }
   }
 
   getTypes(){
-    return this.http.get('http://localhost:4567/evaluations/types').subscribe(data => {
+    return this.http.get('http://d33951a5.ngrok.io/evaluations/types').subscribe(data => {
       this.types = data['data']
       console.log(this.types)
     })
   }
 
   getCustomers(){
-    return this.http.get('http://localhost:4567/evaluations/types').subscribe(data => {
+    return this.http.get('http://localhost:4567/customers').subscribe(data => {
       this.customers = data['data']
       console.log(this.customers)
     }) 
@@ -48,5 +50,10 @@ export class CreateEvaluationComponent implements OnInit {
       observation: this.observation
     }
     console.log(evaluation)
+    this.create.create(evaluation).subscribe(data => {
+      console.log(data);
+    }, err => {
+      console.log(err)
+    });
   }
 }

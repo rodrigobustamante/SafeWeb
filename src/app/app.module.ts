@@ -17,6 +17,7 @@ import { CreateEvaluationComponent } from './components/evaluation/create-evalua
 import { EvaluationListComponent } from './components/evaluation/evaluation-list/evaluation-list.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth/auth.service';
+import { EvaluationCreateService } from './services/evaluation/evaluation-create.service';
 import { DataTablesModule } from 'angular-datatables';
 
 const appRoutes: Routes = [
@@ -59,7 +60,7 @@ const appRoutes: Routes = [
     HttpModule,
     DataTablesModule
   ],
-  providers: [AuthGuard, AuthService],
+  providers: [AuthGuard, AuthService, EvaluationCreateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
