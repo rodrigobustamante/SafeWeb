@@ -5,15 +5,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { PasswordForgotComponent } from './components/password-forgot/password-forgot.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { PasswordForgotComponent } from './components/auth/password-forgot/password-forgot.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
-import { CustomerListComponent } from './components/customer-list/customer-list.component';
+import { CustomerListComponent } from './components/customer/customer-list/customer-list.component';
 import { LoadingModule } from 'ngx-loading';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpClientModule } from '@angular/common/http';
-import { CreateEvaluationComponent } from './components/create-evaluation/create-evaluation.component';
+import { CreateEvaluationComponent } from './components/evaluation/create-evaluation/create-evaluation.component';
+import { EvaluationListComponent } from './components/evaluation/evaluation-list/evaluation-list.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth/auth.service';
 import { DataTablesModule } from 'angular-datatables';
@@ -22,8 +23,17 @@ const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'recovery', component: PasswordForgotComponent},
-  {path: 'customers', component: CustomerListComponent, canActivate: [AuthGuard]},
-  {path: 'evaluations/create', component: CreateEvaluationComponent, canActivate: [AuthGuard]}
+  {path: 'customers', canActivate: [AuthGuard],
+    children:[
+      {path: '', component: CustomerListComponent}
+    ]
+  },
+  {path: 'evaluations', canActivate: [AuthGuard],
+    children:[
+      {path: '', component: EvaluationListComponent},
+      {path: 'create', component: CreateEvaluationComponent}
+    ]
+  }
 ]
 
 
@@ -35,7 +45,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     HomeComponent,
     CustomerListComponent,
-    CreateEvaluationComponent
+    CreateEvaluationComponent,
+    EvaluationListComponent
   ],
   imports: [
     BrowserModule,

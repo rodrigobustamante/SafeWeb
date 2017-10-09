@@ -13,9 +13,9 @@
       <tbody>
         <tr *ngFor="let evaluation of evaluations">
           <td>{{ evaluation.id }}</td>
-          <td>{{ evaluation.evaluationDate.iLocalMillis + 86400000 | date }}</td>
-          <td>{{ evaluation.evaluationType.type }}</td>
-          <td>{{ evaluation.evaluationType.type }}</td>
+          <td>{{ evaluation.evaluationDate }}</td>
+          <td>{{ evaluation.employee.firstName }} {{ evaluation.employee.lastName }}</td>
+          <td>{{ evaluation.customer.name }}</td>
           <td>{{ evaluation.evaluationType.type }}</td>
         </tr>
       </tbody>
