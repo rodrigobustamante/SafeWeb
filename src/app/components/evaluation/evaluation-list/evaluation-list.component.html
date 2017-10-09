@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="table table-responsive">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Técnico que registró</th>
+          <th>Empresa</th>
+          <th>Tipo de evaluación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let evaluation of evaluations">
+          <td>{{ evaluation.id }}</td>
+          <td>{{ evaluation.evaluationDate.iLocalMillis + 86400000 | date }}</td>
+          <td>{{ evaluation.evaluationType.type }}</td>
+          <td>{{ evaluation.evaluationType.type }}</td>
+          <td>{{ evaluation.evaluationType.type }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
