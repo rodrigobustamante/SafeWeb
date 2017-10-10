@@ -19,6 +19,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth/auth.service';
 import { EvaluationCreateService } from './services/evaluation/evaluation-create.service';
 import { DataTablesModule } from 'angular-datatables';
+import { ShowEvaluationComponent } from './components/evaluation/show-evaluation/show-evaluation.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
@@ -32,11 +33,11 @@ const appRoutes: Routes = [
   {path: 'evaluations', canActivate: [AuthGuard],
     children:[
       {path: '', component: EvaluationListComponent},
-      {path: 'create', component: CreateEvaluationComponent}
+      {path: 'create', component: CreateEvaluationComponent},
+      {path: ':id', component: ShowEvaluationComponent}
     ]
   }
 ]
-
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
     HomeComponent,
     CustomerListComponent,
     CreateEvaluationComponent,
-    EvaluationListComponent
+    EvaluationListComponent,
+    ShowEvaluationComponent
   ],
   imports: [
     BrowserModule,
