@@ -54,7 +54,7 @@ export class EvaluationListComponent implements OnInit {
         }
       }
     };
-    this.http.get( environment.url + "/evaluations").subscribe(data => {
+    this.http.get(environment.url + "/evaluations").subscribe(data => {
       this.evaluations = data["data"];
       console.log(this.evaluations);
       this.dtTrigger.next();

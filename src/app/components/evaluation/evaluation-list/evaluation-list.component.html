@@ -1,4 +1,5 @@
 <div class="container">
+  <flash-messages></flash-messages>
   <div class="table table-responsive">
     <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
       <thead>
@@ -8,6 +9,7 @@
           <th>Técnico que registró</th>
           <th>Empresa</th>
           <th>Tipo de evaluación</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -17,6 +19,9 @@
           <td>{{ evaluation.employee.firstName }} {{ evaluation.employee.lastName }}</td>
           <td>{{ evaluation.customer.name }}</td>
           <td>{{ evaluation.evaluationType.type }}</td>
+          <td>
+            <a href="evaluations/{{ evaluation.id }}">Ver</a>
+          </td>
         </tr>
       </tbody>
     </table>
