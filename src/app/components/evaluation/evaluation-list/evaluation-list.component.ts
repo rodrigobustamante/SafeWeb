@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs/Rx";
 import "rxjs/add/operator/map";
+import { environment } from '../../../../environments/environment';
 
 class Evaluation{
   id: number;
@@ -53,7 +54,7 @@ export class EvaluationListComponent implements OnInit {
         }
       }
     };
-    this.http.get("http://localhost:4567/evaluations").subscribe(data => {
+    this.http.get( environment.url + "/evaluations").subscribe(data => {
       this.evaluations = data["data"];
       console.log(this.evaluations);
       this.dtTrigger.next();

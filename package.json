@@ -29,7 +29,7 @@
     "datatables.net": "^1.10.16",
     "datatables.net-dt": "^1.10.16",
     "jquery": "^3.2.1",
-    "moment": "^2.18.1",
+    "moment": "^2.19.0",
     "ngx-loading": "^1.0.7",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.18"
