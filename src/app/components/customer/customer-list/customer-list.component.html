@@ -7,6 +7,7 @@
           <th>Rut</th>
           <th>Nombre de fantasía</th>
           <th>Dirección</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -15,6 +16,9 @@
           <td>{{ customer.rut }}</td>
           <td>{{ customer.name }}</td>
           <td>{{ customer.address }}</td>
+          <td>
+            <a href="customers/{{ customer.id }}">Ver</a>
+          </td>
         </tr>
       </tbody>
     </table>

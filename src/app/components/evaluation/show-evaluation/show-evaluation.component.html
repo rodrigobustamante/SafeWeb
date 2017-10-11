@@ -3,10 +3,60 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title text-center">Evaluación a empresa {{ evaluation }}</h2>
+          <h2 class="card-title text-center">Evaluación a empresa {{ evaluation?.customer.name }}</h2>
         </div>
         <div class="card-body">
-          
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Fecha de evaluación</strong>
+                </span>
+              </div>
+              <div>
+                <span>
+                  {{ evaluation?.evaluationDate }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Tipo de evaluación</strong>
+                </span>
+              </div> 
+              <div>
+                <span>
+                  {{ evaluation?.evaluationType.type }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Técnico que realizó la evaluación</strong>
+                </span>
+              </div> 
+              <div>
+                <span>
+                  {{ evaluation?.employee.firstName }}
+                  {{ evaluation?.employee.lastName }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Observación</strong>
+                </span>
+              </div>
+              <div>
+                <span>
+                  {{ evaluation?.observation }}
+                </span>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

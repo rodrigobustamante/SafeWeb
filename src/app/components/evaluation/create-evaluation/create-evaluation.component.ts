@@ -38,7 +38,7 @@ export class CreateEvaluationComponent implements OnInit {
 
   getTypes() {
     return this.http
-      .get(environment.url + "/evaluations/types")
+      .get(environment.url + "/evaluations-types")
       .subscribe(data => {
         this.types = data["data"];
         console.log(this.types);

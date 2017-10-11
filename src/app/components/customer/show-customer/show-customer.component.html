@@ -1,0 +1,39 @@
+<div class="container-fluid" style="margin-top: 50px;">
+  <div class="row justify-content-md-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title text-center">Empresa {{ customer?.name }}</h2>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Rut</strong>
+                </span>
+              </div>
+              <div>
+                <span>
+                  {{ customer?.rut }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Dirección</strong>
+                </span>
+              </div>
+              <div>
+                <span>
+                  {{ customer?.address }}
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

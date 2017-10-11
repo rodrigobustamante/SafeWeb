@@ -20,6 +20,7 @@ import { AuthService } from './services/auth/auth.service';
 import { EvaluationCreateService } from './services/evaluation/evaluation-create.service';
 import { DataTablesModule } from 'angular-datatables';
 import { ShowEvaluationComponent } from './components/evaluation/show-evaluation/show-evaluation.component';
+import { ShowCustomerComponent } from './components/customer/show-customer/show-customer.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
   {path: 'recovery', component: PasswordForgotComponent},
   {path: 'customers', canActivate: [AuthGuard],
     children:[
-      {path: '', component: CustomerListComponent}
+      {path: '', component: CustomerListComponent},
+      {path: ':id', component: ShowCustomerComponent}
     ]
   },
   {path: 'evaluations', canActivate: [AuthGuard],
@@ -49,7 +51,8 @@ const appRoutes: Routes = [
     CustomerListComponent,
     CreateEvaluationComponent,
     EvaluationListComponent,
-    ShowEvaluationComponent
+    ShowEvaluationComponent,
+    ShowCustomerComponent
   ],
   imports: [
     BrowserModule,
