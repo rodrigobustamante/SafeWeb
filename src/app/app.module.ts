@@ -18,9 +18,13 @@ import { EvaluationListComponent } from './components/evaluation/evaluation-list
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth/auth.service';
 import { EvaluationCreateService } from './services/evaluation/evaluation-create.service';
+import { TrainingCreateService } from './services/training/training-create.service';
 import { DataTablesModule } from 'angular-datatables';
 import { ShowEvaluationComponent } from './components/evaluation/show-evaluation/show-evaluation.component';
 import { ShowCustomerComponent } from './components/customer/show-customer/show-customer.component';
+import { TrainingListComponent } from './components/training/training-list/training-list.component';
+import { CreateTrainingComponent } from './components/training/create-training/create-training.component';
+import { ShowTrainingComponent } from './components/training/show-training/show-training.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
@@ -52,7 +56,10 @@ const appRoutes: Routes = [
     CreateEvaluationComponent,
     EvaluationListComponent,
     ShowEvaluationComponent,
-    ShowCustomerComponent
+    ShowCustomerComponent,
+    TrainingListComponent,
+    CreateTrainingComponent,
+    ShowTrainingComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +72,7 @@ const appRoutes: Routes = [
     HttpModule,
     DataTablesModule
   ],
-  providers: [AuthGuard, AuthService, EvaluationCreateService],
+  providers: [AuthGuard, AuthService, EvaluationCreateService, TrainingCreateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
