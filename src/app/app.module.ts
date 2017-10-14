@@ -25,6 +25,8 @@ import { ShowCustomerComponent } from './components/customer/show-customer/show-
 import { TrainingListComponent } from './components/training/training-list/training-list.component';
 import { CreateTrainingComponent } from './components/training/create-training/create-training.component';
 import { ShowTrainingComponent } from './components/training/show-training/show-training.component';
+import { ShowEmployeeComponent } from './components/employee/show-employee/show-employee.component';
+import { EmployeeListComponent } from './components/employee/employee-list/employee-list.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
@@ -59,7 +61,9 @@ const appRoutes: Routes = [
     ShowCustomerComponent,
     TrainingListComponent,
     CreateTrainingComponent,
-    ShowTrainingComponent
+    ShowTrainingComponent,
+    ShowEmployeeComponent,
+    EmployeeListComponent
   ],
   imports: [
     BrowserModule,
