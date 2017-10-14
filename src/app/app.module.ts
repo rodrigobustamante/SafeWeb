@@ -32,6 +32,12 @@ const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'recovery', component: PasswordForgotComponent},
+  {path: 'employees', canActivate: [AuthGuard],
+    children:[
+      {path: '', component: EmployeeListComponent},
+      {path: ':id', component: ShowEmployeeComponent}
+    ]
+  },
   {path: 'customers', canActivate: [AuthGuard],
     children:[
       {path: '', component: CustomerListComponent},

@@ -73,6 +73,7 @@ export class CustomerListComponent implements OnInit {
     };
     this.http.get(environment.url + "/customers").subscribe(data => {
       this.customers = data["data"];
+      console.log(this.customers)
       this.dtTrigger.next();
     });
   }

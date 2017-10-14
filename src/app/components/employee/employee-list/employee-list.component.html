@@ -1,3 +1,26 @@
-<p>
-  employee-list works!
-</p>
+<div class="container">
+  <div class="table table-responsive">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Rut</th>
+          <th>Nombre de fantasía</th>
+          <th>Dirección</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>{{ employee.id }}</td>
+          <td>{{ employee.rut }}</td>
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.address }}</td>
+          <td>
+            <a href="employees/{{ employee.id }}">Ver</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
