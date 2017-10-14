@@ -17,7 +17,7 @@ class Evaluation{
   styleUrls: ['./evaluation-list.component.css']
 })
 export class EvaluationListComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
+  dtOptions: any = {};
   evaluations: Evaluation[] = [];
   dtTrigger: Subject<any> = new Subject<any>();
   headers: any;
@@ -27,6 +27,19 @@ export class EvaluationListComponent implements OnInit {
     this.dtOptions = {
       pagingType: "full_numbers",
       pageLength: 20,
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'copy',
+          text: 'Copiar'
+        },
+        {
+          extend: 'csv',
+          text: 'Exportar a CSV',
+          fieldSeparator: ';',
+          exportOption: [1, 2, 3]
+        }
+      ],
       language: {
         processing: "Procesando...",
         lengthMenu: "Mostrar _MENU_ registros",
