@@ -7,6 +7,8 @@ export class EmployeeGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return true;
+      let user = JSON.parse(localStorage.getItem('user').toString())
+      if(user.role.name === "Trabajador") return true;
+      return false;
   }
 }
