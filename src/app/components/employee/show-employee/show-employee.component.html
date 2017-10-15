@@ -1,3 +1,99 @@
-<p>
-  show-employee works!
-</p>
+<div class="container-fluid" style="margin-top: 50px;">
+  <div class="row justify-content-md-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title text-center">{{ employee?.firstName }} {{ employee?.lastName }}</h2>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Rut</strong>
+                </span>
+              </div>
+              <div>
+                <span>
+                  {{ employee?.rut }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Empresa</strong>
+                </span>
+              </div>
+              <div>
+                <span>
+                  {{ employee?.customer.name }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Fecha de nacimiento</strong>
+                </span>
+              </div>
+              <div>
+                <span>
+                  {{ employee?.birthDate | date:"dd/MM/yy" }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">País</strong>
+                </span>
+              </div>
+              <div>
+                <span>
+                  {{ employee?.country.name }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Género</strong>
+                </span>
+              </div>
+              <div>
+                <span>
+                  {{ employee?.gender }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Correo electrónico</strong>
+                </span>
+              </div>
+              <div>
+                <span>
+                  <a href="mailto:{{ employee?.email }}">{{ employee?.email }}</a>
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Teléfono</strong>
+                </span>
+              </div>
+              <div>
+                <span>
+                  <a href="tel:{{ employee?.phone }}">{{ employee?.phone }}</a>
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
