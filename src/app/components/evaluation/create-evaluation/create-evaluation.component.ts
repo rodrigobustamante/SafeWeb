@@ -30,7 +30,6 @@ export class CreateEvaluationComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem("user") !== null) {
       this.user = JSON.parse(localStorage.getItem("user"));
-      console.log(this.user.id);
       this.getTypes();
       this.getCustomers();
     }
@@ -41,14 +40,12 @@ export class CreateEvaluationComponent implements OnInit {
       .get(environment.url + "/evaluations-types")
       .subscribe(data => {
         this.types = data["data"];
-        console.log(this.types);
       });
   }
 
   getCustomers() {
     return this.http.get(environment.url + "/customers").subscribe(data => {
       this.customers = data["data"];
-      console.log(this.customers);
     });
   }
 
