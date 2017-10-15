@@ -7,6 +7,8 @@ export class AdministratorGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return true;
+      let user = JSON.parse(localStorage.getItem('user').toString())
+      if(user.role.name === "Admin") return true;
+      return false;
   }
 }
