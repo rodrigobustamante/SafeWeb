@@ -25,5 +25,4 @@ export class ShowCustomerComponent implements OnInit {
       console.log(this.customer);
     })
   }
-
 }
