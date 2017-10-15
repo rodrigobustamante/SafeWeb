@@ -7,6 +7,8 @@ export class SupervisorGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return true;
+      let user = JSON.parse(localStorage.getItem('user').toString())
+      if(user.role.name === "Supervisor") return true;
+      return false;
   }
 }
