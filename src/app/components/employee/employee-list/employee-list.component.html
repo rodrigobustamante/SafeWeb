@@ -5,8 +5,9 @@
         <tr>
           <th>ID</th>
           <th>Rut</th>
-          <th>Nombre de fantasía</th>
-          <th>Dirección</th>
+          <th>Nombre</th>
+          <th>Empresa</th>
+          <th>Nacionalidad</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -14,8 +15,9 @@
         <tr *ngFor="let employee of employees">
           <td>{{ employee.id }}</td>
           <td>{{ employee.rut }}</td>
-          <td>{{ employee.name }}</td>
-          <td>{{ employee.address }}</td>
+          <td>{{ employee.firstName }} {{ employee.lastName }}</td>
+          <td>{{ employee.customer.name }}</td>
+          <td>{{ employee.country.name }}</td>
           <td>
             <a href="employees/{{ employee.id }}">Ver</a>
           </td>
