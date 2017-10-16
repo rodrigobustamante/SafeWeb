@@ -14,10 +14,8 @@ export class CreateTrainingComponent implements OnInit {
 user: any;
 types: any;
 expositors: any;
-customers: any;
 expositor: any;
 type: String;
-customer: String;
 date: String;
 observation: String;
 public loading = false;
@@ -32,7 +30,6 @@ constructor(
     if (localStorage.getItem("user") !== null) {
       this.user = JSON.parse(localStorage.getItem("user"));
       this.getTypes();
-      this.getCustomers();
       this.getExpositors();
     }
   }
@@ -54,19 +51,12 @@ constructor(
       });
   }
 
-  getCustomers() {
-    return this.http.get(environment.url + "/customers").subscribe(data => {
-      this.customers = data["data"];
-    });
-  }
-
   onSubmit(){
     this.loading = true;
     const training = {
       expositor_id: this.expositor,
       training_type_id: this.type,
       date: this.date,
-      customer_id: this.customer,
       observation: this.observation
     };
     console.log(training);

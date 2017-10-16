@@ -21,12 +21,6 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="customer">Nombre de la empresa</label>
-              <select [(ngModel)]="customer" class="form-control" name="customer" id="customer">
-                <option *ngFor="let customer of customers" value="{{ customer.id }}">{{ customer.name }}</option>
-              </select>
-            </div>
-            <div class="form-group">
               <label for="date">Fecha de la capacitación</label>
               <input class="form-control" [(ngModel)]="date" name="date" id="date" type="date">
             </div>
