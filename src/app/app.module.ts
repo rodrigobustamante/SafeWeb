@@ -70,6 +70,17 @@ const appRoutes: Routes = [
       },
       { path: ":id", component: ShowEvaluationComponent }
     ]
+  },
+  {
+    path: "trainings",
+    canActivate: [AuthGuard],
+    children: [
+      {path: "", component: TrainingListComponent},
+      {
+        path: "create",
+        component: CreateTrainingComponent
+      }
+    ]
   }
 ];
 

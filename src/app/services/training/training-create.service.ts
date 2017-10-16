@@ -1,8 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Http, Headers} from '@angular/http';
+import 'rxjs/add/operator/map';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class TrainingCreateService {
-
-  constructor() { }
-
+  training: any;
+  constructor(private http: Http) {}
+  create(training){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(environment.url + "/training", training, {headers: headers})
+    .map(res => res.json());
+  }
 }
