@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  url: 'http://7795453e.ngrok.io'
+  url: 'http://dbd9d18e.ngrok.io'
 };
