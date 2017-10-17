@@ -25,6 +25,8 @@ import { ShowEmployeeComponent } from "./components/employee/show-employee/show-
 import { EmployeeListComponent } from "./components/employee/employee-list/employee-list.component";
 import { CreateEvaluationComponent } from "./components/evaluation/create-evaluation/create-evaluation.component";
 import { EvaluationListComponent } from "./components/evaluation/evaluation-list/evaluation-list.component";
+import { RegisterAttendeesComponent } from './components/training/register-attendees/register-attendees.component';
+
 // Servicios
 import { AuthService } from "./services/auth/auth.service";
 import { EvaluationCreateService } from "./services/evaluation/evaluation-create.service";
@@ -78,8 +80,11 @@ const appRoutes: Routes = [
       {path: "", component: TrainingListComponent},
       {
         path: "create",
-        component: CreateTrainingComponent
-      }
+        children: [
+          {path: "", component: CreateTrainingComponent},
+          {path: "attendees", component: RegisterAttendeesComponent}
+        ]
+      },
     ]
   }
 ];
@@ -100,7 +105,8 @@ const appRoutes: Routes = [
     CreateTrainingComponent,
     ShowTrainingComponent,
     ShowEmployeeComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    RegisterAttendeesComponent
   ],
   imports: [
     BrowserModule,

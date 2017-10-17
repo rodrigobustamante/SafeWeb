@@ -13,8 +13,11 @@ import { FlashMessagesService } from "angular2-flash-messages";
 export class CreateTrainingComponent implements OnInit {
 user: any;
 types: any;
+name: String;
 expositors: any;
 expositor: any;
+customers: any;
+customer;
 type: String;
 date: String;
 observation: String;
@@ -31,6 +34,7 @@ constructor(
       this.user = JSON.parse(localStorage.getItem("user"));
       this.getTypes();
       this.getExpositors();
+      this.getCustomers();
     }
   }
 
@@ -39,7 +43,6 @@ constructor(
     .get(environment.url + "/expositors")
     .subscribe(data => {
       this.expositors = data["data"];
-      console.log(this.expositors)
     })
   }
 
@@ -51,11 +54,21 @@ constructor(
       });
   }
 
+  getCustomers(){
+    return this.http
+      .get(environment.url + "/customers")
+      .subscribe(data => {
+        this.customers = data["data"];
+      })
+  }
+
   onSubmit(){
     this.loading = true;
     const training = {
+      name: this.name,
       expositor_id: this.expositor,
       training_type_id: this.type,
+      customer_id: this.customer,
       date: this.date,
       observation: this.observation
     };
@@ -63,18 +76,16 @@ constructor(
     this.create.create(training).subscribe(
       data => {
         this.loading = false;
-        this.route
-          .navigate(["/trainings"]).then(() => {
-            this.message.show(`¡Capacitación registrada correctamente!`, {
-              cssClass: "alert-success",
-              timeout: 5000
-            });
-          }).catch(err => {
-            this.message.show(`¡Error al ingresar la capacitación!`, {
-              cssClass: "alert-danger",
-              timeout: 5000
-            });
+        localStorage.removeItem("customer_id");
+        localStorage.setItem("customer_id", this.customer);
+        this.route.navigate(["trainings/create/attendees"]).then(() => {
+          
+        }).catch(err => {
+          this.message.show(`¡Error al ingresar la capacitación! ${err}`, {
+            cssClass: "alert-danger",
+            timeout: 5000
           });
+        });
       },
       err => {
         this.loading = false;

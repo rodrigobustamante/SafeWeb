@@ -1,0 +1,42 @@
+<div class="container-fluid" style="margin-top: 50px;">
+  <div class="row justify-content-md-center">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title text-center">Registrar asistentes</h2>
+        </div>
+        <div class="card-body">
+          <h4>Empresa: {{ customer?.name }}</h4>
+          <hr>
+          <form (submit)="onSubmit()">
+            <input value="{{ customer?.id }}" type="hidden">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <tr>
+                  <th>Rut</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Nacionalidad</th>
+                  <th>¿Asistirá?</th>
+                </tr>
+                <tr *ngFor="let e of employee">
+                  <input  value="{{ e.id }}" type="hidden">
+                  <td>{{ e.rut }}</td>
+                  <td>{{ e.firstName }}</td>
+                  <td>{{ e.lastName }}</td>
+                  <td>{{ e.country.name }}</td>
+                  <td>
+                    <label>
+                      <input name="attend" [(ngModel)]="e.attending" id="attend" type="checkbox" value="">
+                    </label>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Ingresar empleados">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
