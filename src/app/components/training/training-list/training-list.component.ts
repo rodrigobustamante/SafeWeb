@@ -3,11 +3,12 @@ import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs/Rx";
 import "rxjs/add/operator/map";
 import { environment } from '../../../../environments/environment';
+import * as moment from 'moment/moment';
 
 class Training{
   id: number;
   expositor: any;
-  date: any;
+  date: Date;
   observation: string;
   type: any;
 }
@@ -19,28 +20,20 @@ class Training{
 })
 export class TrainingListComponent implements OnInit {
   dtOptions: any = {};
-  trainings: any;
+  trainings: Training[] = [];
   dtTrigger: Subject<any> = new Subject<any>();
   headers: any;
+  date: any;
   constructor(public http: HttpClient) { }
 
   ngOnInit() {
-    console.log("asdas")
+    this.date = moment().format('YYYY-MM-DD HH:mm:ss:ms')
+    console.log(this.date)
     this.dtOptions = {
       pagingType: "full_numbers",
       pageLength: 20,
-      dom: 'Bfrtip',
-      buttons: [
-        {
-          extend: 'copy',
-          text: 'Copiar'
-        },
-        {
-          extend: 'csv',
-          text: 'Exportar a CSV',
-          fieldSeparator: ';',
-          exportOption: [1, 2, 3]
-        }
+      columnDefs: [
+        { "orderable": false, "targets": 1 }
       ],
       language: {
         processing: "Procesando...",

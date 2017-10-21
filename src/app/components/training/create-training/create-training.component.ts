@@ -72,12 +72,14 @@ constructor(
       date: this.date,
       observation: this.observation
     };
-    console.log(training);
+//    console.log(training);
     this.create.create(training).subscribe(
       data => {
+        console.log(data)
         this.loading = false;
-        localStorage.removeItem("customer_id");
-        localStorage.setItem("customer_id", this.customer);
+        localStorage.removeItem("training_id");
+        let training_id = data.training_id;
+        localStorage.setItem("training_id", training_id);
         this.route.navigate(["trainings/create/attendees"]).then(() => {
           
         }).catch(err => {
