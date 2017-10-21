@@ -26,6 +26,7 @@ import { EmployeeListComponent } from "./components/employee/employee-list/emplo
 import { CreateEvaluationComponent } from "./components/evaluation/create-evaluation/create-evaluation.component";
 import { EvaluationListComponent } from "./components/evaluation/evaluation-list/evaluation-list.component";
 import { RegisterAttendeesComponent } from './components/training/register-attendees/register-attendees.component';
+import { TrainingAssistanceComponent } from './components/training/training-assistance/training-assistance.component';
 
 // Servicios
 import { AuthService } from "./services/auth/auth.service";
@@ -78,11 +79,12 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {path: "", component: TrainingListComponent},
+      {path: "assistance/:id", component: TrainingAssistanceComponent},
       {
         path: "create",
         children: [
           {path: "", component: CreateTrainingComponent},
-          {path: "attendees", component: RegisterAttendeesComponent}
+          {path: "attendees", component: RegisterAttendeesComponent},
         ]
       },
     ]
@@ -106,7 +108,8 @@ const appRoutes: Routes = [
     ShowTrainingComponent,
     ShowEmployeeComponent,
     EmployeeListComponent,
-    RegisterAttendeesComponent
+    RegisterAttendeesComponent,
+    TrainingAssistanceComponent
   ],
   imports: [
     BrowserModule,

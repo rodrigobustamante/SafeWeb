@@ -72,16 +72,18 @@ constructor(
       date: this.date,
       observation: this.observation
     };
-//    console.log(training);
     this.create.create(training).subscribe(
       data => {
         console.log(data)
         this.loading = false;
         localStorage.removeItem("training_id");
+        localStorage.removeItem("customer_id");
         let training_id = data.training_id;
+        let customer_id = this.customer;
         localStorage.setItem("training_id", training_id);
+        localStorage.setItem("customer_id", customer_id);
         this.route.navigate(["trainings/create/attendees"]).then(() => {
-          
+          console.log("flag")
         }).catch(err => {
           this.message.show(`¡Error al ingresar la capacitación! ${err}`, {
             cssClass: "alert-danger",

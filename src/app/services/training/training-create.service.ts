@@ -20,4 +20,11 @@ export class TrainingCreateService {
     return this.http.post(environment.url + "/students", send, {headers: headers})
     .map(res => res.json());
   }
+
+  assistance(send){
+    let headers = new Headers();
+    headers.append('Content-type', 'application/json');
+    return this.http.put(environment.url + "/students", send, {headers: headers})
+    .map(res => res.json());
+  }
 }

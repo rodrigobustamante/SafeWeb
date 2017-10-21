@@ -19,11 +19,10 @@
           <td>{{ training.type.type }}</td>
           <td>
             <a href="trainings/{{ training.id }}">Ver</a>
-            <span *ngIf="training.date > date && training.state.state === 'Realizada'">
-              | <a href="trainings/{{ training.id }}">Pasar lista</a> 
-            </span> 
-            
-            <!-- <a href="trainings/assistance/{{ training.id }}">Pasar lista</a> -->
+            <span *ngIf="training.date < date && training.state.state === 'Registrada'">
+              |
+              <a href="trainings/assistance/{{ training.id }}">Pasar lista</a>
+            </span>
           </td>
         </tr>
       </tbody>

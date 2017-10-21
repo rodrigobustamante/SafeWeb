@@ -27,6 +27,7 @@ export class RegisterAttendeesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if(this.training_id === null && this.customer_id === null) this.route.navigate(["trainings"])
     this.http.get(environment.url + "/customers").subscribe(data => {
       this.customers = data["data"];
       this.customer = _.find(this.customers, c => {
@@ -34,7 +35,6 @@ export class RegisterAttendeesComponent implements OnInit {
       });
     });
     this.getCustomers();
-    console.log(this.training_id);
   }
 
   getCustomers() {
@@ -91,6 +91,5 @@ export class RegisterAttendeesComponent implements OnInit {
         console.log(err);
       }
     );
-    // console.log(send)
   }
 }

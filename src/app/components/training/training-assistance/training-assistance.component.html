@@ -1,0 +1,43 @@
+<div class="container-fluid" style="margin-top: 50px">
+  <div class="row justify-content-md-center">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title text-center">Pasar lista a capacitación</h2>
+        </div>
+        <div class="card-body">
+          <p>Nombre de la capacitación: {{ training?.name }}</p>
+          <p>Fecha de la capacitación: 
+            {{ training?.date | date:'dd/MM/yyyy' }}
+          </p>
+          <p>Observación: {{ training?.observation }}</p>
+          <hr>
+          <form (submit)="onSubmit()">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <tr>
+                  <th>Rut</th>
+                  <th>Nombre</th>
+                  <th>Correo electrónico</th>
+                  <th>¿Asistió?</th>
+                </tr>
+                <tr *ngFor="let student of students">
+                  <td>{{ student.employee.rut }}</td>
+                  <td>{{ student.employee.first_name }} {{ student.employee.first_name }}</td>
+                  <td>{{ student.employee.email }}</td>
+                  <td>
+                    <label>
+                      <input type="checkbox" name="attended" id="attended" [(ngModel)]="student.attended">
+                    </label>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <flash-messages></flash-messages>
+            <input type="submit" class="btn btn-primary" value="Pasar lista">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
