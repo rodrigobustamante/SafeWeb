@@ -4,20 +4,14 @@
       <img style="max-width:100px; margin-top: -10px;" alt="Brand" src="assets/images/icon.png">
       <a style="font-size: 20px; color: white; text-decoration: none;" href="/">Safe</a>
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <i style="color:white; font-size: 30px;" class="material-icons">menu</i>      
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <i style="color:white; font-size: 30px;" class="material-icons">menu</i>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li *ngIf="session" class="nav-item active">
           <a class="nav-link" href="/">Inicio</a>
-        </li>
-        <li *ngIf="session" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="evaluations" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Evaluaciones</a>
-          <div class="dropdown-menu" aria-labelledby="evaluations">
-            <a class="dropdown-item" href="evaluations">Listar evaluaciones</a>
-            <a class="dropdown-item" href="evaluations/create">Registrar evaluación</a>
-          </div>
         </li>
         <li *ngIf="session" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="customers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empresas</a>
@@ -32,8 +26,16 @@
           </div>
         </li>
         <li *ngIf="session" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="evaluations" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Evaluaciones</a>
+          <div class="dropdown-menu" aria-labelledby="evaluations">
+            <a class="dropdown-item" href="evaluations/create">Registrar evaluación</a>
+            <a class="dropdown-item" href="evaluations">Listar evaluaciones</a>
+          </div>
+        </li>
+        <li *ngIf="session" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="trainings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Capacitaciones</a>
           <div class="dropdown-menu" aria-labelledby="trainings">
+            <a class="dropdown-item" href="trainings/create">Registrar capacitación</a>
             <a class="dropdown-item" href="trainings">Lista de capacitaciones</a>
           </div>
         </li>
@@ -41,7 +43,7 @@
       <ul *ngIf="session" class="navbar-nav pull-right">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="session" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{ user.firstName }} {{ user.lastName }}
+            {{ user.firstName }} {{ user.lastName }}
           </a>
           <div class="dropdown-menu" aria-labelledby="session">
             <a (click)="onLogout()" class="dropdown-item" href="/">Cerrar sesión</a>

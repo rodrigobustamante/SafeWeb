@@ -87,6 +87,7 @@ const appRoutes: Routes = [
           {path: "attendees", component: RegisterAttendeesComponent},
         ]
       },
+      {path: ":id", component: ShowTrainingComponent}
     ]
   }
 ];

@@ -1,3 +1,82 @@
-<p>
-  show-training works!
-</p>
+<div class="container-fluid" style="margin-top: 50px;">
+  <div class="row justify-content-md-center">
+    <div class="col-md-11">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title text-center">Capacitación: {{ training?.name }}</h2>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Fecha de la capacitación:</strong>
+                  {{ training?.date | date:'dd/MM/yyyy' }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Tipo de capacitación:</strong>
+                  {{ training?.type.type }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Expositor:</strong>
+                  {{ training?.expositor.first_name }} {{ training?.expositor.last_name }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Estado:</strong>
+                  {{ training?.state.state }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <strong class="black">Participantes:</strong>
+                <hr>
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <tr>
+                      <th>Rut</th>
+                      <th>Nombre</th>
+                      <th>Correo electrónico</th>
+                      <th>Estado</th>
+                    </tr>
+                    <tr *ngFor="let student of students">
+                      <td>{{ student.employee.rut }}</td>
+                      <td>{{ student.employee.first_name }} {{ student.employee.last_name }}</td>
+                      <td>{{ student.employee.email }}</td>
+                      <td *ngIf="student.state.state === 'Asistido'" style="color:green">
+                        {{ student.state.state }}
+                      </td>
+                      <td *ngIf="student.state.state === 'No asistido'" style="color:red">
+                        {{ student.state.state }}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Observación:</strong>
+                  {{ training?.observation }}
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
