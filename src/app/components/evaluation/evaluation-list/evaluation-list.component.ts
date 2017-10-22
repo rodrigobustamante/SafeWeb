@@ -26,19 +26,9 @@ export class EvaluationListComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: "full_numbers",
-      pageLength: 20,
-      dom: 'Bfrtip',
-      buttons: [
-        {
-          extend: 'copy',
-          text: 'Copiar'
-        },
-        {
-          extend: 'csv',
-          text: 'Exportar a CSV',
-          fieldSeparator: ';',
-          exportOption: [1, 2, 3]
-        }
+      pageLength: 10,
+      columnDefs: [
+        { "orderable": false, "targets": 1 }
       ],
       language: {
         processing: "Procesando...",

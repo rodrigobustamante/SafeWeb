@@ -30,20 +30,7 @@ export class EmployeeListComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: "full_numbers",
-      pageLength: 20,
-      dom: 'Bfrtip',
-      buttons: [
-        {
-          extend: 'copy',
-          text: 'Copiar'
-        },
-        {
-          extend: 'csv',
-          text: 'Exportar a CSV',
-          fieldSeparator: ';',
-          exportOption: [1, 2, 3]
-        }
-      ],
+      pageLength: 10,
       language: {
         processing: "Procesando...",
         lengthMenu: "Mostrar _MENU_ registros",

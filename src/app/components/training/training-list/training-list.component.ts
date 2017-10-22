@@ -31,7 +31,7 @@ export class TrainingListComponent implements OnInit {
     console.log(this.date)
     this.dtOptions = {
       pagingType: "full_numbers",
-      pageLength: 20,
+      pageLength: 10,
       columnDefs: [
         { "orderable": false, "targets": 1 }
       ],
