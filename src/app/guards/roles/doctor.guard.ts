@@ -7,13 +7,13 @@ import {
 import { Observable } from "rxjs/Observable";
 
 @Injectable()
-export class EngineerGuard implements CanActivate {
+export class DoctorGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    let user = JSON.parse(localStorage.getItem("user").toString());
-    if (user.role.name === "Ingeniero") return true;
+    let user = JSON.parse(localStorage.getItem("doctor").toString());
+    if(user.icm) return true;
     return false;
   }
 }
