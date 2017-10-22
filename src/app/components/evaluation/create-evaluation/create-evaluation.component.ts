@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { EvaluationCreateService } from './../../../services/evaluation/evaluation-create.service';
-import { environment } from '../../../../environments/environment';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { EvaluationCreateService } from "./../../../services/evaluation/evaluation-create.service";
+import { environment } from "../../../../environments/environment";
+import { Router } from "@angular/router";
 import { FlashMessagesService } from "angular2-flash-messages";
 
 @Component({
@@ -50,7 +50,8 @@ export class CreateEvaluationComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loading = true;
+    //this.loading = true;
+    let validate;
     const evaluation = {
       employee_id: this.user.id,
       evaluation_type_id: this.type,
@@ -58,26 +59,35 @@ export class CreateEvaluationComponent implements OnInit {
       customer_id: this.customer,
       observation: this.observation
     };
-    this.create.create(evaluation).subscribe(
-      data => {
-        this.loading = false;
-        this.route
-          .navigate(["/evaluations"]).then(() => {
-            this.message.show(`¡Evaluación registrada correctamente!`, {
-              cssClass: "alert-success",
-              timeout: 5000
+    validate = this.create.validate(evaluation);
+    if (validate != true)
+      this.message.show(`¡${validate}!`, {
+        cssClass: "alert-danger",
+        timeout: 7000
+      });
+    else
+      this.create.create(evaluation).subscribe(
+        data => {
+          this.loading = false;
+          this.route
+            .navigate(["/evaluations"])
+            .then(() => {
+              this.message.show(`¡Evaluación registrada correctamente!`, {
+                cssClass: "alert-success",
+                timeout: 5000
+              });
+            })
+            .catch(err => {
+              this.message.show(`¡Error al ingresar la evaluación!`, {
+                cssClass: "alert-danger",
+                timeout: 5000
+              });
             });
-          }).catch(err => {
-            this.message.show(`¡Error al ingresar la evaluación!`, {
-              cssClass: "alert-danger",
-              timeout: 5000
-            });
-          });
-      },
-      err => {
-        this.loading = false;
-        console.log(err);
-      }
-    );
+        },
+        err => {
+          this.loading = false;
+          console.log(err);
+        }
+      );
   }
 }
