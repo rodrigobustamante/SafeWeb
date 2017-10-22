@@ -6,37 +6,42 @@
           <h2 class="card-title text-center">Ingresar capacitación</h2>
         </div>
         <div class="card-body">
-          <flash-messages></flash-messages>
           <form (submit)="onSubmit()">
+            <p style="color: #AAAAAA">
+              Todos los campos son requeridos(*)
+            </p>
             <div class="form-group">
-              <label for="name">Nombre</label>
-              <input type="text" [(ngModel)]="name" class="form-control" name="type" id="type"> 
+              <label for="name">Nombre de la capacitación*</label>
+              <input type="text" [(ngModel)]="name" class="form-control" name="type" id="type">
             </div>
             <div class="form-group">
-              <label for="customer">Empresa</label>
+              <label for="customer">Empresa*</label>
               <select [(ngModel)]="customer" class="form-control" name="customer" id="customer">
                 <option *ngFor="let customer of customers" value="{{ customer.id }}">{{ customer.name }}</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="expositor">Expositor</label>
+              <label for="expositor">Expositor*</label>
               <select [(ngModel)]="expositor" class="form-control" name="expositor" id="expositor">
                 <option *ngFor="let expositor of expositors" value="{{ expositor.id }}">{{ expositor.first_name }} {{ expositor.last_name }}</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="type">Tipo de capacitación</label>
+              <label for="type">Tipo de capacitación*</label>
               <select [(ngModel)]="type" class="form-control" name="type" id="type">
                 <option *ngFor="let type of types" value="{{ type.id }}">{{ type.type }}</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="date">Fecha de la capacitación</label>
+              <label for="date">Fecha de la capacitación*</label>
               <input class="form-control" [(ngModel)]="date" name="date" id="date" type="date">
             </div>
             <div class="form-group">
-              <label for="observation">Observaciones</label>
+              <label for="observation">Observaciones*</label>
               <textarea class="form-control" [(ngModel)]="observation" name="observation" id="observation" rows="3"></textarea>
+            </div>
+            <div>
+              <flash-messages></flash-messages>
             </div>
             <input type="submit" class="btn btn-lg btn-primary btn-block" value="Registrar" />
             <a class="btn btn-lg btn-primary btn-block" href="">Cancelar</a>

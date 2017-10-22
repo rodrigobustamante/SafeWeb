@@ -50,7 +50,7 @@ export class CreateEvaluationComponent implements OnInit {
   }
 
   onSubmit() {
-    //this.loading = true;
+    this.loading = true;
     let validate;
     const evaluation = {
       employee_id: this.user.id,
@@ -60,12 +60,13 @@ export class CreateEvaluationComponent implements OnInit {
       observation: this.observation
     };
     validate = this.create.validate(evaluation);
-    if (validate != true)
+    if (validate != true) {
+      this.loading = false;
       this.message.show(`¡${validate}!`, {
         cssClass: "alert-danger",
         timeout: 7000
       });
-    else
+    } else {
       this.create.create(evaluation).subscribe(
         data => {
           this.loading = false;
@@ -89,5 +90,6 @@ export class CreateEvaluationComponent implements OnInit {
           console.log(err);
         }
       );
+    }
   }
 }
