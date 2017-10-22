@@ -64,10 +64,14 @@ import { DoctorGuard } from "./guards/roles/doctor.guard";
 // Rutas
 const appRoutes: Routes = [
   // Sin autenticación
-  { path: "login", component: LoginComponent },
-  { path: "login-doctor", component: DoctorLoginComponent },
-  { path: "recovery", component: PasswordForgotComponent },
-
+  {
+    path: "login",
+    children: [
+      { path: "", component: LoginComponent },
+      { path: "doctor", component: DoctorLoginComponent },
+      { path: "recovery", component: PasswordForgotComponent }
+    ]
+  },
   // Autenticación requerida
 
   // Página de bienvenida

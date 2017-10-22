@@ -11,8 +11,9 @@ import { AuthService } from "./../../../services/auth/auth.service";
 })
 export class DoctorLoginComponent implements OnInit {
   loading = false;
-  username: String;
+  rut: String;
   password: String;
+  icm: Number;
   constructor(
     public http: HttpClient,
     private message: FlashMessagesService,
@@ -22,7 +23,7 @@ export class DoctorLoginComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem("user") === null) {
-      this.router.navigate(["/login"]);
+      this.router.navigate(["/login/doctor"]);
     } else {
       this.router.navigate([""]);
       return true;
@@ -30,25 +31,26 @@ export class DoctorLoginComponent implements OnInit {
   }
 
   onLogin() {
+    console.log("aksdkas");
     this.loading = true;
     let validate = true;
-    validate = this.auth.validate(this.username, this.password);
+    validate = this.auth.validateDoctor(this.rut, this.icm, this.password);
     if (!validate) {
       this.loading = false;
-      this.message.show(`¡El usuario y la contraseña son requeridos!`, {
+      this.message.show(`¡El rut, el ICM y la contraseña son requeridos!`, {
         cssClass: "alert-danger",
         timeout: 5000
       });
       return false;
     }
     const doctor = {
-      username: this.username,
+      rut: this.rut,
+      icm: this.icm,
       password: this.password
     };
-    this.auth.loginDoctor(doctor).subscribe(
-      data => {
-        this.loading =false;
-      }
-    )
+    console.log(doctor);
+    // this.auth.loginDoctor(doctor).subscribe(data => {
+    //   this.loading = false;
+    // });
   }
 }

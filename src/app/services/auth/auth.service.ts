@@ -35,6 +35,12 @@ export class AuthService {
     return true;
   }
 
+  validateDoctor(rut, icm, password) {
+    if (rut === undefined || icm === undefined || password === undefined)
+      return false;
+    return true;
+  }
+
   logout() {
     this.user = null;
     localStorage.clear();
