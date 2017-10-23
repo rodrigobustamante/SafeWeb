@@ -137,7 +137,7 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: "", component: DoctorListComponent },
-      { path: "medical-visit", component: MedicalVisitComponent}
+      { path: "medical-visit", component: MedicalVisitComponent, canActivate:[DoctorGuard]}
     ]
   }
 ];

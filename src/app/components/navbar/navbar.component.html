@@ -40,10 +40,20 @@
           </div>
         </li>
       </ul>
-      <ul *ngIf="session" class="navbar-nav pull-right">
+      <ul *ngIf="session && !doctor" class="navbar-nav pull-right">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="session" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ user.firstName }} {{ user.lastName }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="session">
+            <a (click)="onLogout()" class="dropdown-item" href="/">Cerrar sesión</a>
+          </div>
+        </li>
+      </ul>
+      <ul *ngIf="session && doctor" class="navbar-nav pull-right">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="session" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ user.first_name }} {{ user.last_name }}
           </a>
           <div class="dropdown-menu" aria-labelledby="session">
             <a (click)="onLogout()" class="dropdown-item" href="/">Cerrar sesión</a>

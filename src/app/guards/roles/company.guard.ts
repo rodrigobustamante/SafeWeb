@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import {
   CanActivate,
   ActivatedRouteSnapshot,
@@ -8,12 +9,19 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class CompanyGuard implements CanActivate {
+  constructor(private route: Router){}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     let user = JSON.parse(localStorage.getItem("user").toString());
-    if (user.role.name === "Empresa") return true;
-    return false;
+    if (user.role === undefined){
+      this.route.navigate([""])
+      return false;
+    }else{
+      if (user.role.name === "Empresa") return true;
+      this.route.navigate([""])
+      return false;
+    }
   }
 }

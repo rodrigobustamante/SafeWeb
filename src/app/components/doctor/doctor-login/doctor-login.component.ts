@@ -49,7 +49,7 @@ export class DoctorLoginComponent implements OnInit {
     };
     this.auth.loginDoctor(doctor).subscribe(data => {
       this.loading = false;
-      this.auth.storeUser(doctor)
+      this.auth.storeUser(data)
       this.router.navigate(["/doctors/medical-visit"])
     }, err => {
       this.loading = false;
