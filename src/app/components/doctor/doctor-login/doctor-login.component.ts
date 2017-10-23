@@ -31,7 +31,6 @@ export class DoctorLoginComponent implements OnInit {
   }
 
   onLogin() {
-    console.log("aksdkas");
     this.loading = true;
     let validate = true;
     validate = this.auth.validateDoctor(this.rut, this.icm, this.password);
@@ -48,9 +47,17 @@ export class DoctorLoginComponent implements OnInit {
       icm: this.icm,
       password: this.password
     };
-    console.log(doctor);
-    // this.auth.loginDoctor(doctor).subscribe(data => {
-    //   this.loading = false;
-    // });
+    this.auth.loginDoctor(doctor).subscribe(data => {
+      this.loading = false;
+      this.auth.storeUser(doctor)
+      this.router.navigate(["/doctors/medical-visit"])
+    }, err => {
+      this.loading = false;
+      let error = JSON.parse(err._body)
+      this.message.show(`¡${error.message}!`, {
+        cssClass: "alert-danger",
+        timeout: 5000
+      });
+    });
   }
 }

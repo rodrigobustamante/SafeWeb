@@ -26,7 +26,7 @@ export class AuthService {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     return this.http
-      .post(environment.node + "", doctor, { headers: headers })
+      .post(environment.node + "/login", doctor, { headers: headers })
       .map(res => res.json());
   }
 

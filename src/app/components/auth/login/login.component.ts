@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     this.loading = true;
-    let validate = true
-    validate = this.auth.validate(this.username, this.password)
+    let validate = true;
+    validate = this.auth.validate(this.username, this.password);
     if (!validate) {
       this.loading = false;
       this.message.show(`¡El usuario y la contraseña son requeridos!`, {

@@ -45,6 +45,7 @@ import { TrainingAssistanceComponent } from "./components/training/training-assi
 
 // Doctores
 import { DoctorListComponent } from "./components/doctor/doctor-list/doctor-list.component";
+import { MedicalVisitComponent } from "./components/doctor/medical-visit/medical-visit.component";
 
 // Servicios
 import { AuthService } from "./services/auth/auth.service";
@@ -134,7 +135,10 @@ const appRoutes: Routes = [
   {
     path: "doctors",
     canActivate: [AuthGuard],
-    children: [{ path: "", component: DoctorListComponent }]
+    children: [
+      { path: "", component: DoctorListComponent },
+      { path: "medical-visit", component: MedicalVisitComponent}
+    ]
   }
 ];
 
@@ -158,7 +162,8 @@ const appRoutes: Routes = [
     RegisterAttendeesComponent,
     TrainingAssistanceComponent,
     DoctorLoginComponent,
-    DoctorListComponent
+    DoctorListComponent,
+    MedicalVisitComponent
   ],
   imports: [
     BrowserModule,
