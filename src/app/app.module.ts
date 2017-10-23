@@ -61,6 +61,7 @@ import { EngineerGuard } from "./guards/roles/engineer.guard";
 import { SupervisorGuard } from "./guards/roles/supervisor.guard";
 import { TechnicalGuard } from "./guards/roles/technical.guard";
 import { DoctorGuard } from "./guards/roles/doctor.guard";
+import { RegisterExamComponent } from "./components/doctor/register-exam/register-exam.component";
 
 // Rutas
 const appRoutes: Routes = [
@@ -81,7 +82,7 @@ const appRoutes: Routes = [
   // Páginas de empleados
   {
     path: "employees",
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdministratorGuard, SupervisorGuard, CompanyGuard],
     children: [
       { path: "", component: EmployeeListComponent },
       { path: ":id", component: ShowEmployeeComponent }
@@ -91,7 +92,7 @@ const appRoutes: Routes = [
   // Páginas de clientes/empresas
   {
     path: "customers",
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdministratorGuard, SupervisorGuard],
     children: [
       { path: "", component: CustomerListComponent },
       { path: ":id", component: ShowCustomerComponent }
@@ -101,7 +102,7 @@ const appRoutes: Routes = [
   // Páginas de evaluaciones
   {
     path: "evaluations",
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdministratorGuard],
     children: [
       { path: "", component: EvaluationListComponent },
       {
@@ -110,6 +111,7 @@ const appRoutes: Routes = [
         canActivate: [AdministratorGuard]
       },
       { path: ":id", component: ShowEvaluationComponent }
+      //Falta agregar el editar el campo observación de evaluación
     ]
   },
 
@@ -137,7 +139,11 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: "", component: DoctorListComponent },
-      { path: "medical-visit", component: MedicalVisitComponent, canActivate:[DoctorGuard]}
+      {
+        path: "medical-visit",
+        component: MedicalVisitComponent,
+        canActivate: [DoctorGuard]
+      }
     ]
   }
 ];
@@ -163,7 +169,8 @@ const appRoutes: Routes = [
     TrainingAssistanceComponent,
     DoctorLoginComponent,
     DoctorListComponent,
-    MedicalVisitComponent
+    MedicalVisitComponent,
+    RegisterExamComponent
   ],
   imports: [
     BrowserModule,
