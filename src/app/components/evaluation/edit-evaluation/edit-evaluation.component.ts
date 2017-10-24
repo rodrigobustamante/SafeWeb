@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { environment } from "./../../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { EvaluationCreateService } from "./../../../services/evaluation/evaluation-create.service";
-
+import { FlashMessagesService } from "angular2-flash-messages";
 @Component({
   selector: "app-edit-evaluation",
   templateUrl: "./edit-evaluation.component.html",
@@ -19,7 +19,8 @@ export class EditEvaluationComponent implements OnInit {
     private router: Router,
     private active: ActivatedRoute,
     private http: HttpClient,
-    private edit: EvaluationCreateService
+    private edit: EvaluationCreateService,
+    private message: FlashMessagesService
   ) {}
 
   ngOnInit() {
@@ -39,9 +40,13 @@ export class EditEvaluationComponent implements OnInit {
         "Observación del técnico: " +
         this.observation_old + "\n" +
         "Observación del ingeniero: " + this.observation_new;
-      console.log(this.observation)
-        this.edit.edit(this.id, this.observation).subscribe(data => {
-        console.log("data");
+      this.edit.edit(this.id, this.observation).subscribe(data => {
+        this.router.navigate(["evaluations"]).then(() => {
+          this.message.show(`¡Observación agregada correctamente!`, {
+            cssClass: "alert-success",
+            timeout: 7000
+          });
+        })
       });
     }
   }
