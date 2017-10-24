@@ -27,4 +27,15 @@ export class EvaluationCreateService {
       return "La fecha no puede ser menor o igual al día actual";
     return true;
   }
+
+  edit(id, observation) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    console.log(id, observation)
+    return this.http
+      .put(environment.url + `/evaluations/${id}`, {observation: observation} , {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
 }
