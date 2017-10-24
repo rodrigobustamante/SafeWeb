@@ -6,6 +6,8 @@ import * as _ from "lodash";
 import { ActivatedRoute } from "@angular/router";
 import { TrainingCreateService } from "./../../../services/training/training-create.service";
 import { environment } from "../../../../environments/environment";
+import { Router } from '@angular/router';
+import { FlashMessagesService } from "angular2-flash-messages";
 
 @Component({
   selector: "app-training-assistance",
@@ -19,7 +21,9 @@ export class TrainingAssistanceComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private active: ActivatedRoute,
-    private attended: TrainingCreateService
+    private attended: TrainingCreateService,
+    private router: Router,
+    private message: FlashMessagesService
   ) {}
 
   ngOnInit() {
@@ -41,8 +45,13 @@ export class TrainingAssistanceComponent implements OnInit {
       students: this.students
     };
     this.attended.assistance(send).subscribe(data => {
-      console.log(data);
-      console.log(send);
+      this.router.navigate(["trainings"]).then(() => {
+        return this.message.show(`¡Lista pasada correctamente!`,
+        {
+          cssClass: "alert-success",
+          timeout: 5000
+        });
+      })
     });
   }
 }
