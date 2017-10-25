@@ -1,3 +1,25 @@
-<p>
-  doctor-list works!
-</p>
+<div class="container">
+  <div class="table table-responsive">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
+      <thead>
+        <tr>
+          <th>ICM</th>
+          <th>Rut</th>
+          <th>Nombre</th>
+          <th>Grupo</th>
+          <th>Condición</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doctor of doctors">
+          <td>{{ doctor.icm }}</td>
+          <td>{{ doctor.rut }}</td>
+          <td>{{ doctor.firstName }} {{ doctor.lastName }}</td>
+          <td>{{ doctor.group }}</td>
+          <td *ngIf="doctor.condition === 'Afiliado'" style="color: green">{{ doctor.condition }}</td>
+          <td *ngIf="doctor.condition === 'No Afiliado'" style="color:red">{{ doctor.condition }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
