@@ -48,11 +48,13 @@ import { TrainingAssistanceComponent } from "./components/training/training-assi
 import { DoctorListComponent } from "./components/doctor/doctor-list/doctor-list.component";
 import { MedicalVisitComponent } from "./components/doctor/medical-visit/medical-visit.component";
 import { RegisterExamComponent } from "./components/doctor/register-exam/register-exam.component";
+import { RegisterMedicalVisitComponent } from "./components/doctor/register-medical-visit/register-medical-visit.component";
 
 // Servicios
 import { AuthService } from "./services/auth/auth.service";
 import { EvaluationCreateService } from "./services/evaluation/evaluation-create.service";
 import { TrainingCreateService } from "./services/training/training-create.service";
+import { DoctorService } from "./services/doctor/doctor.service";
 
 // Guardias
 import { AuthGuard } from "./guards/auth.guard";
@@ -141,6 +143,10 @@ const appRoutes: Routes = [
     children: [
       { path: "", component: DoctorListComponent },
       {
+        path: "register-medical-visit",
+        component: RegisterMedicalVisitComponent
+      },
+      {
         path: "medical-visit",
         component: MedicalVisitComponent,
         canActivate: [DoctorGuard]
@@ -172,7 +178,8 @@ const appRoutes: Routes = [
     DoctorListComponent,
     MedicalVisitComponent,
     RegisterExamComponent,
-    EditEvaluationComponent
+    EditEvaluationComponent,
+    RegisterMedicalVisitComponent
   ],
   imports: [
     BrowserModule,
@@ -196,7 +203,8 @@ const appRoutes: Routes = [
     DoctorGuard,
     AuthService,
     EvaluationCreateService,
-    TrainingCreateService
+    TrainingCreateService,
+    DoctorService
   ],
   bootstrap: [AppComponent]
 })

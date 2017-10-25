@@ -1,0 +1,49 @@
+<div class="row justify-content-md-center">
+  <div class="col-md-auto">
+    <div class="container-fluid" style="margin-top: 75px;">
+      <div class="row">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title text-center">Registrar visita médica</h2>
+          </div>
+          <div class="card-body">
+            <flash-messages></flash-messages>
+            <form class="form-inline" (submit)="onFilter()">
+              <label class="mr-sm-2" for="customer_id">Empresa:</label>
+              <select class="custom-select mb-2 mr-sm-2 mb-sm-0" [(ngModel)]="customer_id" class="form-control" name="customer_id" id="customer_id">
+                <option *ngFor="let customer of customers" value="{{ customer.id }}">
+                  {{ customer.name }}
+                </option>
+              </select>
+              <input type="submit" value="Listar empleados" class="btn btn-primary">
+            </form>
+            <form *ngIf="customer_id && employees" (submit)="onRegister()">
+              <hr>
+              <div class="form-group">
+                <label for="date">Fecha</label>
+                <input [(ngModel)]="date" class="form-control" type="date" name="date" id="date">
+              </div>
+              <div class="form-group">
+                <label for="icm">Médico</label>
+                <select [(ngModel)]="icm" class="form-control" name="icm" id="icm">
+                  <option *ngFor="let doctor of doctors" value="{{ doctor.icm }}">
+                    {{ doctor.icm }} - {{ doctor.firstName }} {{ doctor.lastName }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="employee_id">Empleado</label>
+                <select [(ngModel)]="employee_id" class="form-control" name="employee_id" id="employee_id">
+                  <option *ngFor="let employee of employees" value="{{ employee.id }}">
+                    {{ employee.firstName }} {{ employee.lastName }}
+                  </option>
+                </select>
+              </div>
+              <input type="submit" class="btn btn-lg btn-primary btn-block" value="Registrar visita médica" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
