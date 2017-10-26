@@ -13,26 +13,26 @@
         <li *ngIf="session" class="nav-item active">
           <a class="nav-link" href="/">Inicio</a>
         </li>
-        <li *ngIf="session" class="nav-item dropdown">
+        <li *ngIf="session && (auth.isAdmin() || auth.isSupervisor())" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="customers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empresas</a>
           <div class="dropdown-menu" aria-labelledby="customers">
             <a class="dropdown-item" href="customers">Listar empresas</a>
           </div>
         </li>
-        <li *ngIf="session" class="nav-item dropdown">
+        <li *ngIf="session && (auth.isAdmin() || auth.isSupervisor())" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="employees" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empleados</a>
           <div class="dropdown-menu" aria-labelledby="employees">
             <a class="dropdown-item" href="employees">Lista de empleados</a>
           </div>
         </li>
-        <li *ngIf="session" class="nav-item dropdown">
+        <li *ngIf="session && (auth.isAdmin() || auth.isSupervisor() || auth.isTechnical())" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="evaluations" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Evaluaciones</a>
           <div class="dropdown-menu" aria-labelledby="evaluations">
             <a class="dropdown-item" href="evaluations/create">Registrar evaluación</a>
-            <a class="dropdown-item" href="evaluations">Listar evaluaciones</a>
+            <a class="dropdown-item" *ngIf="auth.isAdmin() || auth.isSupervisor()" href="evaluations">Listar evaluaciones</a>
           </div>
         </li>
-        <li *ngIf="session" class="nav-item dropdown">
+        <li *ngIf="session && (auth.isAdmin() || auth.isSupervisor())" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="trainings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Capacitaciones</a>
           <div class="dropdown-menu" aria-labelledby="trainings">
             <a class="dropdown-item" href="trainings/create">Registrar capacitación</a>
@@ -40,7 +40,7 @@
           </div>
         </li>
       </ul>
-      <ul *ngIf="session" class="navbar-nav pull-right">
+      <ul *ngIf="session" class="nav navbar-nav ml-auto">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="session" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ user.firstName }} {{ user.lastName }}
