@@ -10,7 +10,8 @@
           </div>
           <div class="card-body">
             <flash-messages></flash-messages>
-            <div class="table-responsive">
+            <h4 style="text-align: center;" *ngIf="!exists">Usten no posee visitas médicas</h4>
+            <div *ngIf="exists" class="table-responsive">
               <table class="table">
                 <thead>
                   <tr>
