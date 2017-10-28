@@ -11,25 +11,34 @@ import { AuthService } from "./../../../services/auth/auth.service";
   styleUrls: ["./medical-visit.component.css"]
 })
 export class MedicalVisitComponent implements OnInit {
-  doctor : any;
-   
-  constructor(private http: HttpClient, private route: Router, private auth: AuthService) {}
+  doctor: any;
+  evaluations: any;
+  exists: boolean;
+  constructor(
+    private http: HttpClient,
+    private route: Router,
+    private auth: AuthService
+  ) {}
 
   ngOnInit() {
     this.doctor = JSON.parse(localStorage.getItem("user"));
-    console.log(this.doctor)
-    console.log("Admin " + this.auth.isAdmin())
-    console.log("Empresa " + this.auth.isCompany())
-    console.log("Doctor " + this.auth.isDoctor())
-    console.log("Empleado " + this.auth.isEmployee())
-    console.log("Ingeniero " + this.auth.isEngineer())
-    console.log("Supervisor " + this.auth.isSupervisor())
-    console.log("Técnico " + this.auth.isTechnical())
+    console.log(this.doctor);
+    this.getVisits();
+    if (this.evaluations === undefined) this.exists = false;
+    console.log("Admin " + this.auth.isAdmin());
+    console.log("Empresa " + this.auth.isCompany());
+    console.log("Doctor " + this.auth.isDoctor());
+    console.log("Empleado " + this.auth.isEmployee());
+    console.log("Ingeniero " + this.auth.isEngineer());
+    console.log("Supervisor " + this.auth.isSupervisor());
+    console.log("Técnico " + this.auth.isTechnical());
   }
 
-  getVisits(){
-    this.http.get(environment.url + `/attentions/${this.doctor.icm}`).subscribe(data => {
-      console.log(data)
-    })
+  getVisits() {
+    this.http
+      .get(environment.url + `/attentions/${this.doctor.icm}`)
+      .subscribe(data => {
+        this.evaluations = data;
+      });
   }
 }

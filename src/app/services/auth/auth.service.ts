@@ -49,7 +49,7 @@ export class AuthService {
   isAdmin() {
     this.user =  JSON.parse(localStorage.getItem("user"));
     if(this.user.role === undefined) return false;
-    if(this.user.role.name === "Administrador") return true;
+    if(this.user.role.name === "Admin") return true;
     return false;    
   }
 
