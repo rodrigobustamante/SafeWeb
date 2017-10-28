@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs/Rx";
 import "rxjs/add/operator/map";
-import { environment } from '../../../../environments/environment';
-import * as moment from 'moment/moment';
+import { environment } from "../../../../environments/environment";
+import * as moment from "moment/moment";
+import { AuthService } from "./../../../services/auth/auth.service";
+import * as _ from "lodash";
 
-class Training{
+class Training {
   id: number;
   expositor: any;
   date: Date;
@@ -14,9 +16,9 @@ class Training{
 }
 
 @Component({
-  selector: 'app-training-list',
-  templateUrl: './training-list.component.html',
-  styleUrls: ['./training-list.component.css']
+  selector: "app-training-list",
+  templateUrl: "./training-list.component.html",
+  styleUrls: ["./training-list.component.css"]
 })
 export class TrainingListComponent implements OnInit {
   dtOptions: any = {};
@@ -24,17 +26,17 @@ export class TrainingListComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject<any>();
   headers: any;
   date: any;
-  constructor(public http: HttpClient) { }
+  user: any;
+  constructor(public http: HttpClient, private auth: AuthService) {}
 
   ngOnInit() {
-    this.date = moment().format('YYYY-MM-DD HH:mm:ss:ms')
-    console.log(this.date)
+    this.date = moment().format("YYYY-MM-DD HH:mm:ss:ms");
+    this.user = JSON.parse(localStorage.getItem("user"));
+    console.log(this.date);
     this.dtOptions = {
       pagingType: "full_numbers",
       pageLength: 10,
-      columnDefs: [
-        { "orderable": false, "targets": 1 }
-      ],
+      columnDefs: [{ orderable: false, targets: 1 }],
       language: {
         processing: "Procesando...",
         lengthMenu: "Mostrar _MENU_ registros",
@@ -62,10 +64,28 @@ export class TrainingListComponent implements OnInit {
         }
       }
     };
-    this.http.get(environment.url + "/trainings").subscribe(data => {
-      this.trainings = data["data"];
-      console.log(this.trainings);
-      this.dtTrigger.next();
-    });
+    if (this.auth.isCompany()) {
+      this.http.get(environment.url + "/trainings").subscribe(data => {
+        this.trainings = data["data"];
+        let id = 1;
+        this.trainings = _.map(this.trainings, evaluation => {
+          if (evaluation.customer.id === Number(this.user.customer.id)) {
+            evaluation.id = id;
+            id = id + 1;
+            return evaluation;
+          }
+        });
+        this.trainings = _.filter(this.trainings, null);
+        this.dtTrigger.next();
+      });
+      this.http.get(environment.url + "/trainings").subscribe(data => {
+        this.trainings = data["data"];
+      });
+    } else {
+      this.http.get(environment.url + "/trainings").subscribe(data => {
+        this.trainings = data["data"];
+        this.dtTrigger.next();
+      });
+    }
   }
 }

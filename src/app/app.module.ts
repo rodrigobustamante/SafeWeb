@@ -103,7 +103,12 @@ const appRoutes: Routes = [
   {
     path: "evaluations",
     children: [
-      { path: "", component: EvaluationListComponent },
+      {
+        path: "",
+        component: EvaluationListComponent,
+        canActivate: [AuthGuard, CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor", "Ingeniero", "Empresa"] }
+      },
       {
         path: "create",
         component: CreateEvaluationComponent,
@@ -114,7 +119,7 @@ const appRoutes: Routes = [
         path: ":id",
         component: ShowEvaluationComponent,
         canActivate: [AuthGuard, CheckRoleGuard],
-        data: { allowedRoles: ["Admin", "Supervisor", "Ingeniero"] }
+        data: { allowedRoles: ["Admin", "Supervisor", "Ingeniero", "Empresa"] }
       },
       {
         path: ":id/edit",
@@ -130,16 +135,41 @@ const appRoutes: Routes = [
     path: "trainings",
     canActivate: [AuthGuard],
     children: [
-      { path: "", component: TrainingListComponent },
-      { path: "assistance/:id", component: TrainingAssistanceComponent },
+      {
+        path: "",
+        component: TrainingListComponent,
+        canActivate: [AuthGuard, CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor", "Empresa"] }
+      },
+      {
+        path: "assistance/:id",
+        component: TrainingAssistanceComponent,
+        canActivate: [AuthGuard, CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor"] }
+      },
       {
         path: "create",
         children: [
-          { path: "", component: CreateTrainingComponent },
-          { path: "attendees", component: RegisterAttendeesComponent }
+          {
+            path: "",
+            component: CreateTrainingComponent,
+            canActivate: [AuthGuard, CheckRoleGuard],
+            data: { allowedRoles: ["Admin", "Supervisor"] }
+          },
+          {
+            path: "attendees",
+            component: RegisterAttendeesComponent,
+            canActivate: [AuthGuard, CheckRoleGuard],
+            data: { allowedRoles: ["Admin", "Supervisor"] }
+          }
         ]
       },
-      { path: ":id", component: ShowTrainingComponent }
+      {
+        path: ":id",
+        component: ShowTrainingComponent,
+        canActivate: [AuthGuard, CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor", "Empresa"] }
+      }
     ]
   },
 
@@ -148,16 +178,22 @@ const appRoutes: Routes = [
     path: "doctors",
     canActivate: [AuthGuard],
     children: [
-      { path: "", component: DoctorListComponent },
+      {
+        path: "",
+        component: DoctorListComponent,
+        canActivate: [CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor"] }
+      },
       {
         path: "register-medical-visit",
-        component: RegisterMedicalVisitComponent
+        component: RegisterMedicalVisitComponent,
+        canActivate: [CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor"] }
       },
       {
         path: "medical-visit",
         component: MedicalVisitComponent,
-        canActivate: [AuthGuard, CheckRoleGuard],
-        data: { allowedRoles: ["Admin", "Supervisor"] },
+        canActivate: [DoctorGuard]
       }
     ]
   }
