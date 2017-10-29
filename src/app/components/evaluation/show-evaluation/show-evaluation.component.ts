@@ -33,7 +33,6 @@ export class ShowEvaluationComponent implements OnInit {
     doc.text(
       `Evaluación de ${this.evaluation.evaluationType.type} de la empresa ${this
         .evaluation.customer.name}`, 20, 20);
-    doc.line(1, 1 ,1, 1)
     doc.setFontSize(20);
     doc.text(`Fecha de la evaluacion: ${this.evaluation.date}.`, 20, 20);
     doc.text("Observaciones:", 20, 20);
