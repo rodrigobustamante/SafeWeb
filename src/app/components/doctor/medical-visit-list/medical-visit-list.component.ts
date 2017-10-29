@@ -14,7 +14,7 @@ import * as _ from "lodash";
 })
 export class MedicalVisitListComponent implements OnInit {
   dtOptions: any = {};
-  visits: any = {};
+  visits: any;
   dtTrigger: Subject<any> = new Subject<any>();
   headers: any;
   date: any;
@@ -88,9 +88,10 @@ export class MedicalVisitListComponent implements OnInit {
   getVisitsEmployee() {
     this.http.get(environment.url + "/attentions").subscribe(data => {
       this.visits = data["data"];
+      console.log(this.visits);
       let id = 1;
       this.visits = _.map(this.visits, visit => {
-        if (visit.customer.id === Number(this.user.customer.id)) {
+        if (visit.employee.id === Number(this.user.id)) {
           visit.id = id;
           id = id + 1;
           return visit;

@@ -17,11 +17,11 @@
           <td>{{ training.id }}</td>
           <td>{{ training.date | date:'dd/MM/yyyy' }}</td>
           <td>{{ training.customer.name }}</td>
-          <td>{{ training.expositor.first_name }} {{ training.expositor.last_name }}</td>
+          <td>{{ training.expositor.firstName }} {{ training.expositor.last_name }}</td>
           <td>{{ training.type.type }}</td>
           <td>
             <a href="trainings/{{ training.id }}">Ver</a>
-            <span *ngIf="training.date < date && training.state.state === 'Registrada' && !auth.isCompany()">
+            <span *ngIf="training.date < date && training.state.state === 'Registrada' && !(auth.isCompany() || auth.isEmployee())">
               |
               <a href="trainings/assistance/{{ training.id }}">Pasar lista</a>
             </span>

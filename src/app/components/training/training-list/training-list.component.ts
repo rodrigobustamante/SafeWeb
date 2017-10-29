@@ -97,17 +97,18 @@ export class TrainingListComponent implements OnInit {
   }
 
   getTrainingsEmployee() {
-    this.http.get(environment.url + "/trainings").subscribe(data => {
+    this.http.get(environment.url + `/employees/${this.user.id}/trainings`).subscribe(data => {
       this.trainings = data["data"];
-      let id = 1;
-      this.trainings = _.map(this.trainings, training => {
-        if (training.employee.id === Number(this.user.id)) {
-          training.id = id;
-          id = id + 1;
-          return training;
-        }
-      });
-      this.trainings = _.filter(this.trainings, null);
+      console.log(this.trainings);
+      // let id = 1;
+      // this.trainings = _.map(this.trainings, training => {
+      //   if (training.employee.id === Number(this.user.id)) {
+      //     training.id = id;
+      //     id = id + 1;
+      //     return training;
+      //   }
+      // });
+      // this.trainings = _.filter(this.trainings, null);
       this.dtTrigger.next();
     });
   }

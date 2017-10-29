@@ -4,11 +4,16 @@
       <thead>
         <tr>
           <th>ID</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let visit of visits">
           <td>{{ visit.id }}</td>
+          <td>{{ visit.date }}</td>
+          <td>{{ visit.state.state }}</td>
           <td>
             <a href="visits/{{ visit.id }}">Ver</a>
           </td>
