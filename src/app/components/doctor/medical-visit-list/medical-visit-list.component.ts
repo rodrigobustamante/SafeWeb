@@ -7,22 +7,14 @@ import * as moment from "moment/moment";
 import { AuthService } from "./../../../services/auth/auth.service";
 import * as _ from "lodash";
 
-class Training {
-  id: number;
-  expositor: any;
-  date: Date;
-  observation: string;
-  type: any;
-}
-
 @Component({
-  selector: "app-training-list",
-  templateUrl: "./training-list.component.html",
-  styleUrls: ["./training-list.component.css"]
+  selector: "app-medical-visit-list",
+  templateUrl: "./medical-visit-list.component.html",
+  styleUrls: ["./medical-visit-list.component.css"]
 })
-export class TrainingListComponent implements OnInit {
+export class MedicalVisitListComponent implements OnInit {
   dtOptions: any = {};
-  trainings: Training[] = [];
+  visits: any;
   dtTrigger: Subject<any> = new Subject<any>();
   headers: any;
   date: any;
@@ -30,13 +22,10 @@ export class TrainingListComponent implements OnInit {
   constructor(public http: HttpClient, private auth: AuthService) {}
 
   ngOnInit() {
-    this.date = moment().format("YYYY-MM-DD HH:mm:ss:ms");
     this.user = JSON.parse(localStorage.getItem("user"));
-    console.log(this.date);
     this.dtOptions = {
       pagingType: "full_numbers",
       pageLength: 10,
-      columnDefs: [{ orderable: false, targets: 1 }],
       language: {
         processing: "Procesando...",
         lengthMenu: "Mostrar _MENU_ registros",
@@ -65,49 +54,50 @@ export class TrainingListComponent implements OnInit {
       }
     };
     if (this.auth.isCompany()) {
-      this.getTrainingsCompany();
+      this.getVisitsCompany();
     } else if (this.auth.isEmployee()) {
-      this.getTrainingsEmployee();
+      this.getVisitsEmployee();
     } else {
-      this.getTrainings();
+      this.getVisits();
     }
   }
 
-  getTrainings() {
-    this.http.get(environment.url + "/trainings").subscribe(data => {
-      this.trainings = data["data"];
+  getVisits() {
+    this.http.get(environment.url + "/attentions").subscribe(data => {
+      this.visits = data["data"];
       this.dtTrigger.next();
     });
   }
 
-  getTrainingsCompany() {
-    this.http.get(environment.url + "/trainings").subscribe(data => {
-      this.trainings = data["data"];
+  getVisitsCompany() {
+    this.http.get(environment.url + "/attentions").subscribe(data => {
+      this.visits = data["data"];
       let id = 1;
-      this.trainings = _.map(this.trainings, training => {
-        if (training.customer.id === Number(this.user.customer.id)) {
-          training.id = id;
+      this.visits = _.map(this.visits, visit => {
+        if (visit.customer.id === Number(this.user.customer.id)) {
+          visit.id = id;
           id = id + 1;
-          return training;
+          return visit;
         }
       });
-      this.trainings = _.filter(this.trainings, null);
+      this.visits = _.filter(this.visits, null);
       this.dtTrigger.next();
     });
   }
 
-  getTrainingsEmployee() {
-    this.http.get(environment.url + `/employees/${this.user.id}/trainings`).subscribe(data => {
-      this.trainings = data["data"];
-      console.log(this.trainings);
+  getVisitsEmployee() {
+    this.http.get(environment.url + "/attentions").subscribe(data => {
+      this.visits = data["data"];
+      console.log(this.visits);
       let id = 1;
-      this.trainings = _.map(this.trainings, training => {
-        if (training.employee.id === Number(this.user.id)) {
-          training.id = id;
+      this.visits = _.map(this.visits, visit => {
+        if (visit.employee.id === Number(this.user.id)) {
+          visit.id = id;
           id = id + 1;
-          return training;
+          return visit;
         }
       });
+      this.visits = _.filter(this.visits, null);
       this.dtTrigger.next();
     });
   }

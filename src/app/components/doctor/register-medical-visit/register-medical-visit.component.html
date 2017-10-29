@@ -15,6 +15,7 @@
                   {{ customer.name }}
                 </option>
               </select>
+              &emsp;
               <input type="submit" value="Listar empleados" class="btn btn-primary">
             </form>
             <form *ngIf="customer_id && employees" (submit)="onRegister()">

@@ -61,6 +61,9 @@
                       <td *ngIf="student.state.state === 'No asistido'" style="color:red">
                         {{ student.state.state }}
                       </td>
+                      <td *ngIf="student.state.state === 'Registrado'" style="color:grey">
+                          {{ student.state.state }}
+                        </td>
                     </tr>
                   </table>
                 </div>

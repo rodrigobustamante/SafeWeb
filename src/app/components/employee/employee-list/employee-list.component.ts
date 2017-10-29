@@ -2,7 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs/Rx";
 import "rxjs/add/operator/map";
-import { environment } from '../../../../environments/environment';
+import { environment } from "../../../../environments/environment";
+import { AuthService } from "./../../../services/auth/auth.service";
+import * as _ from "lodash";
 
 class Employee {
   id: number;
@@ -13,21 +15,23 @@ class Employee {
 }
 
 @Component({
-  selector: 'app-employee-list',
-  templateUrl: './employee-list.component.html',
-  styleUrls: ['./employee-list.component.css']
+  selector: "app-employee-list",
+  templateUrl: "./employee-list.component.html",
+  styleUrls: ["./employee-list.component.css"]
 })
 export class EmployeeListComponent implements OnInit {
   dtOptions: any = {};
   employees: any;
   dtTrigger: Subject<any> = new Subject<any>();
   headers: any;
-  constructor(public http: HttpClient) {
+  user: any;
+  constructor(public http: HttpClient, private auth: AuthService) {
     this.headers = new Headers();
     this.headers.append("content-type", "application/json");
   }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem("user"));
     this.dtOptions = {
       pagingType: "full_numbers",
       pageLength: 10,
@@ -58,9 +62,32 @@ export class EmployeeListComponent implements OnInit {
         }
       }
     };
+    if (this.auth.isCompany()) {
+      this.getEmployeesCompany();
+    } else {
+      this.getEmployees();
+    }
+  }
+
+  getEmployees() {
     this.http.get(environment.url + "/employees").subscribe(data => {
       this.employees = data["data"];
-      console.log(this.employees);
+      this.dtTrigger.next();
+    });
+  }
+
+  getEmployeesCompany() {
+    this.http.get(environment.url + "/employees").subscribe(data => {
+      this.employees = data["data"];
+      let id = 1;
+      this.employees = _.map(this.employees, employee => {
+        if (employee.customer.id === Number(this.user.customer.id)) {
+          employee.id = id;
+          id = id + 1;
+          return employee;
+        }
+      });
+      this.employees = _.filter(this.employees, null);
       this.dtTrigger.next();
     });
   }

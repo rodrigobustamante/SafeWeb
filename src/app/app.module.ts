@@ -49,6 +49,8 @@ import { DoctorListComponent } from "./components/doctor/doctor-list/doctor-list
 import { MedicalVisitComponent } from "./components/doctor/medical-visit/medical-visit.component";
 import { RegisterExamComponent } from "./components/doctor/register-exam/register-exam.component";
 import { RegisterMedicalVisitComponent } from "./components/doctor/register-medical-visit/register-medical-visit.component";
+import { DoctorGuard } from "./guards/roles/doctor.guard";
+import { MedicalVisitListComponent } from "./components/doctor/medical-visit-list/medical-visit-list.component";
 
 // Servicios
 import { AuthService } from "./services/auth/auth.service";
@@ -58,13 +60,7 @@ import { DoctorService } from "./services/doctor/doctor.service";
 
 // Guardias
 import { AuthGuard } from "./guards/auth.guard";
-import { AdministratorGuard } from "./guards/roles/administrator.guard";
-import { CompanyGuard } from "./guards/roles/company.guard";
-import { EmployeeGuard } from "./guards/roles/employee.guard";
-import { EngineerGuard } from "./guards/roles/engineer.guard";
-import { SupervisorGuard } from "./guards/roles/supervisor.guard";
-import { TechnicalGuard } from "./guards/roles/technical.guard";
-import { DoctorGuard } from "./guards/roles/doctor.guard";
+import { CheckRoleGuard } from "./guards/check-role.guard";
 
 // Rutas
 const appRoutes: Routes = [
@@ -85,7 +81,8 @@ const appRoutes: Routes = [
   // Páginas de empleados
   {
     path: "employees",
-    canActivate: [AuthGuard, AdministratorGuard, SupervisorGuard, CompanyGuard],
+    canActivate: [AuthGuard, CheckRoleGuard],
+    data: { allowedRoles: ["Admin", "Supervisor", "Empresa"] },
     children: [
       { path: "", component: EmployeeListComponent },
       { path: ":id", component: ShowEmployeeComponent }
@@ -95,7 +92,8 @@ const appRoutes: Routes = [
   // Páginas de clientes/empresas
   {
     path: "customers",
-    canActivate: [AuthGuard, AdministratorGuard, SupervisorGuard],
+    canActivate: [AuthGuard, CheckRoleGuard],
+    data: { allowedRoles: ["Admin", "Supervisor"] },
     children: [
       { path: "", component: CustomerListComponent },
       { path: ":id", component: ShowCustomerComponent }
@@ -105,16 +103,31 @@ const appRoutes: Routes = [
   // Páginas de evaluaciones
   {
     path: "evaluations",
-    canActivate: [AuthGuard, AdministratorGuard],
     children: [
-      { path: "", component: EvaluationListComponent },
+      {
+        path: "",
+        component: EvaluationListComponent,
+        canActivate: [AuthGuard, CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor", "Ingeniero", "Empresa"] }
+      },
       {
         path: "create",
         component: CreateEvaluationComponent,
-        canActivate: [AdministratorGuard]
+        canActivate: [AuthGuard, CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Tecnico"] }
       },
-      { path: ":id", component: ShowEvaluationComponent },
-      { path: ":id/edit", component: EditEvaluationComponent }
+      {
+        path: ":id",
+        component: ShowEvaluationComponent,
+        canActivate: [AuthGuard, CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor", "Ingeniero", "Empresa"] }
+      },
+      {
+        path: ":id/edit",
+        component: EditEvaluationComponent,
+        canActivate: [AuthGuard, CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor", "Ingeniero"] }
+      }
     ]
   },
 
@@ -123,16 +136,41 @@ const appRoutes: Routes = [
     path: "trainings",
     canActivate: [AuthGuard],
     children: [
-      { path: "", component: TrainingListComponent },
-      { path: "assistance/:id", component: TrainingAssistanceComponent },
+      {
+        path: "",
+        component: TrainingListComponent,
+        canActivate: [AuthGuard, CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor", "Empresa", "Trabajador"] }
+      },
+      {
+        path: "assistance/:id",
+        component: TrainingAssistanceComponent,
+        canActivate: [AuthGuard, CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor"] }
+      },
       {
         path: "create",
         children: [
-          { path: "", component: CreateTrainingComponent },
-          { path: "attendees", component: RegisterAttendeesComponent }
+          {
+            path: "",
+            component: CreateTrainingComponent,
+            canActivate: [AuthGuard, CheckRoleGuard],
+            data: { allowedRoles: ["Admin", "Supervisor"] }
+          },
+          {
+            path: "attendees",
+            component: RegisterAttendeesComponent,
+            canActivate: [AuthGuard, CheckRoleGuard],
+            data: { allowedRoles: ["Admin", "Supervisor"] }
+          }
         ]
       },
-      { path: ":id", component: ShowTrainingComponent }
+      {
+        path: ":id",
+        component: ShowTrainingComponent,
+        canActivate: [AuthGuard, CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor", "Empresa", "Trabajador"] }
+      }
     ]
   },
 
@@ -141,15 +179,28 @@ const appRoutes: Routes = [
     path: "doctors",
     canActivate: [AuthGuard],
     children: [
-      { path: "", component: DoctorListComponent },
+      {
+        path: "",
+        component: DoctorListComponent,
+        canActivate: [CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor"] }
+      },
       {
         path: "register-medical-visit",
-        component: RegisterMedicalVisitComponent
+        component: RegisterMedicalVisitComponent,
+        canActivate: [CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor"] }
       },
       {
         path: "medical-visit",
         component: MedicalVisitComponent,
         canActivate: [DoctorGuard]
+      },
+      {
+        path: "medical-visit-list",
+        component: MedicalVisitListComponent,
+        canActivate: [AuthGuard, CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor", "Empresa", "Trabajador"] }
       }
     ]
   }
@@ -179,7 +230,8 @@ const appRoutes: Routes = [
     MedicalVisitComponent,
     RegisterExamComponent,
     EditEvaluationComponent,
-    RegisterMedicalVisitComponent
+    RegisterMedicalVisitComponent,
+    MedicalVisitListComponent
   ],
   imports: [
     BrowserModule,
@@ -193,13 +245,8 @@ const appRoutes: Routes = [
     DataTablesModule
   ],
   providers: [
+    CheckRoleGuard,
     AuthGuard,
-    AdministratorGuard,
-    CompanyGuard,
-    EmployeeGuard,
-    EngineerGuard,
-    SupervisorGuard,
-    TechnicalGuard,
     DoctorGuard,
     AuthService,
     EvaluationCreateService,
