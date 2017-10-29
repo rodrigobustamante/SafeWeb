@@ -60,24 +60,32 @@ export class EvaluationListComponent implements OnInit {
       }
     };
     if (this.auth.isCompany()) {
-      this.http.get(environment.url + "/evaluations").subscribe(data => {
-        this.evaluations = data["data"];
-        let id = 1;
-        this.evaluations = _.map(this.evaluations, evaluation => {
-          if (evaluation.customer.id === Number(this.user.customer.id)) {
-            evaluation.id = id;
-            id = id + 1;
-            return evaluation;
-          }
-        });
-        this.evaluations = _.filter(this.evaluations, null);
-        this.dtTrigger.next();
-      });
+      this.getEvaluationsCompany();
     } else {
-      this.http.get(environment.url + "/evaluations").subscribe(data => {
-        this.evaluations = data["data"];
-        this.dtTrigger.next();
-      });
+      this.getEvaluations();
     }
+  }
+
+  getEvaluations() {
+    this.http.get(environment.url + "/evaluations").subscribe(data => {
+      this.evaluations = data["data"];
+      this.dtTrigger.next();
+    });
+  }
+
+  getEvaluationsCompany() {
+    this.http.get(environment.url + "/evaluations").subscribe(data => {
+      this.evaluations = data["data"];
+      let id = 1;
+      this.evaluations = _.map(this.evaluations, evaluation => {
+        if (evaluation.customer.id === Number(this.user.customer.id)) {
+          evaluation.id = id;
+          id = id + 1;
+          return evaluation;
+        }
+      });
+      this.evaluations = _.filter(this.evaluations, null);
+      this.dtTrigger.next();
+    });
   }
 }

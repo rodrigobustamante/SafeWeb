@@ -33,11 +33,18 @@
             <a class="dropdown-item" *ngIf="auth.isAdmin() || auth.isSupervisor()" href="evaluations">Listar evaluaciones</a>
           </div>
         </li>
-        <li *ngIf="session && (auth.isAdmin() || auth.isSupervisor() || auth.isCompany())" class="nav-item dropdown">
+        <li *ngIf="session && (auth.isAdmin() || auth.isSupervisor() || auth.isCompany() || auth.isEmployee())" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="trainings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Capacitaciones</a>
           <div class="dropdown-menu" aria-labelledby="trainings">
             <a *ngIf="auth.isAdmin() || auth.isSupervisor()" class="dropdown-item" href="trainings/create">Registrar capacitación</a>
             <a class="dropdown-item" href="trainings">Lista de capacitaciones</a>
+          </div>
+        </li>
+        <li *ngIf="session && (auth.isAdmin() || auth.isSupervisor() || auth.isCompany()|| auth.isEmployee())" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="trainings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Atenciones médicas</a>
+          <div class="dropdown-menu" aria-labelledby="trainings">
+            <a *ngIf="auth.isAdmin() || auth.isSupervisor()" class="dropdown-item" href="doctors/register-medical-visit">Registrar atención médica</a>
+            <a class="dropdown-item" href="doctors/medical-visit">Lista atenciones médicas</a>
           </div>
         </li>
       </ul>

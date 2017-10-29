@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <h2>Bienvenido {{ user.firstName }} {{ user.lastName }}</h2>
         <br>
-        <h3>Tu rol es de <span *ngIf="user.role.name === 'Tecnico'">Técnico</span> y perteneces a la empresa {{ user.customer.name }}</h3>
+        <h3>Tu rol es de {{ user.role.name }} perteneces a la empresa {{ user.customer.name }}</h3>
       </div>
       <div class="col-md-6">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

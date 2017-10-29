@@ -65,27 +65,50 @@ export class TrainingListComponent implements OnInit {
       }
     };
     if (this.auth.isCompany()) {
-      this.http.get(environment.url + "/trainings").subscribe(data => {
-        this.trainings = data["data"];
-        let id = 1;
-        this.trainings = _.map(this.trainings, evaluation => {
-          if (evaluation.customer.id === Number(this.user.customer.id)) {
-            evaluation.id = id;
-            id = id + 1;
-            return evaluation;
-          }
-        });
-        this.trainings = _.filter(this.trainings, null);
-        this.dtTrigger.next();
-      });
-      this.http.get(environment.url + "/trainings").subscribe(data => {
-        this.trainings = data["data"];
-      });
+      this.getTrainingsCompany();
+    } else if (this.auth.isEmployee()) {
+      this.getTrainingsEmployee();
     } else {
-      this.http.get(environment.url + "/trainings").subscribe(data => {
-        this.trainings = data["data"];
-        this.dtTrigger.next();
-      });
+      this.getTrainings();
     }
+  }
+
+  getTrainings() {
+    this.http.get(environment.url + "/trainings").subscribe(data => {
+      this.trainings = data["data"];
+      this.dtTrigger.next();
+    });
+  }
+
+  getTrainingsCompany() {
+    this.http.get(environment.url + "/trainings").subscribe(data => {
+      this.trainings = data["data"];
+      let id = 1;
+      this.trainings = _.map(this.trainings, training => {
+        if (training.customer.id === Number(this.user.customer.id)) {
+          training.id = id;
+          id = id + 1;
+          return training;
+        }
+      });
+      this.trainings = _.filter(this.trainings, null);
+      this.dtTrigger.next();
+    });
+  }
+
+  getTrainingsEmployee() {
+    this.http.get(environment.url + "/trainings").subscribe(data => {
+      this.trainings = data["data"];
+      let id = 1;
+      this.trainings = _.map(this.trainings, training => {
+        if (training.employee.id === Number(this.user.id)) {
+          training.id = id;
+          id = id + 1;
+          return training;
+        }
+      });
+      this.trainings = _.filter(this.trainings, null);
+      this.dtTrigger.next();
+    });
   }
 }

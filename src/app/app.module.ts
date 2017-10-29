@@ -49,6 +49,8 @@ import { DoctorListComponent } from "./components/doctor/doctor-list/doctor-list
 import { MedicalVisitComponent } from "./components/doctor/medical-visit/medical-visit.component";
 import { RegisterExamComponent } from "./components/doctor/register-exam/register-exam.component";
 import { RegisterMedicalVisitComponent } from "./components/doctor/register-medical-visit/register-medical-visit.component";
+import { DoctorGuard } from "./guards/roles/doctor.guard";
+import { MedicalVisitListComponent } from "./components/doctor/medical-visit-list/medical-visit-list.component";
 
 // Servicios
 import { AuthService } from "./services/auth/auth.service";
@@ -59,7 +61,6 @@ import { DoctorService } from "./services/doctor/doctor.service";
 // Guardias
 import { AuthGuard } from "./guards/auth.guard";
 import { CheckRoleGuard } from "./guards/check-role.guard";
-import { DoctorGuard } from "./guards/roles/doctor.guard";
 
 // Rutas
 const appRoutes: Routes = [
@@ -139,7 +140,7 @@ const appRoutes: Routes = [
         path: "",
         component: TrainingListComponent,
         canActivate: [AuthGuard, CheckRoleGuard],
-        data: { allowedRoles: ["Admin", "Supervisor", "Empresa"] }
+        data: { allowedRoles: ["Admin", "Supervisor", "Empresa", "Trabajador"] }
       },
       {
         path: "assistance/:id",
@@ -168,7 +169,7 @@ const appRoutes: Routes = [
         path: ":id",
         component: ShowTrainingComponent,
         canActivate: [AuthGuard, CheckRoleGuard],
-        data: { allowedRoles: ["Admin", "Supervisor", "Empresa"] }
+        data: { allowedRoles: ["Admin", "Supervisor", "Empresa", "Trabajador"] }
       }
     ]
   },
@@ -194,6 +195,12 @@ const appRoutes: Routes = [
         path: "medical-visit",
         component: MedicalVisitComponent,
         canActivate: [DoctorGuard]
+      },
+      {
+        path: "medical-visit-list",
+        component: MedicalVisitListComponent,
+        canActivate: [AuthGuard, CheckRoleGuard],
+        data: { allowedRoles: ["Admin", "Supervisor", "Empresa", "Trabajador"] }
       }
     ]
   }
@@ -223,7 +230,8 @@ const appRoutes: Routes = [
     MedicalVisitComponent,
     RegisterExamComponent,
     EditEvaluationComponent,
-    RegisterMedicalVisitComponent
+    RegisterMedicalVisitComponent,
+    MedicalVisitListComponent
   ],
   imports: [
     BrowserModule,

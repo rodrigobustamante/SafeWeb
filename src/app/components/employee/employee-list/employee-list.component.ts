@@ -63,29 +63,32 @@ export class EmployeeListComponent implements OnInit {
       }
     };
     if (this.auth.isCompany()) {
-      this.http.get(environment.url + "/employees").subscribe(data => {
-        this.employees = data["data"];
-        let id = 1;
-        this.employees = _.map(this.employees, employee => {
-          if (employee.customer.id === Number(this.user.customer.id)) {
-            employee.id = id;
-            id = id + 1;
-            return employee;
-          }
-        });
-        this.employees = _.filter(this.employees, null);
-        this.dtTrigger.next();
-      });
+      this.getEmployeesCompany();
     } else {
-      this.http.get(environment.url + "/employees").subscribe(data => {
-        this.employees = data["data"];
-        this.dtTrigger.next();
-      });
+      this.getEmployees();
     }
-    // this.http.get(environment.url + "/employees").subscribe(data => {
-    //   this.employees = data["data"];
-    //   console.log(this.employees);
-    //   this.dtTrigger.next();
-    // });
+  }
+
+  getEmployees() {
+    this.http.get(environment.url + "/employees").subscribe(data => {
+      this.employees = data["data"];
+      this.dtTrigger.next();
+    });
+  }
+
+  getEmployeesCompany() {
+    this.http.get(environment.url + "/employees").subscribe(data => {
+      this.employees = data["data"];
+      let id = 1;
+      this.employees = _.map(this.employees, employee => {
+        if (employee.customer.id === Number(this.user.customer.id)) {
+          employee.id = id;
+          id = id + 1;
+          return employee;
+        }
+      });
+      this.employees = _.filter(this.employees, null);
+      this.dtTrigger.next();
+    });
   }
 }
