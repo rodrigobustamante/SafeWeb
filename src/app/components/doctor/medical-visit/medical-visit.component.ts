@@ -22,23 +22,23 @@ export class MedicalVisitComponent implements OnInit {
 
   ngOnInit() {
     this.doctor = JSON.parse(localStorage.getItem("user"));
-    console.log(this.doctor);
+    this.exists = false;
     this.getVisits();
-    if (this.evaluations === undefined) this.exists = false;
-    console.log("Admin " + this.auth.isAdmin());
-    console.log("Empresa " + this.auth.isCompany());
-    console.log("Doctor " + this.auth.isDoctor());
-    console.log("Empleado " + this.auth.isEmployee());
-    console.log("Ingeniero " + this.auth.isEngineer());
-    console.log("Supervisor " + this.auth.isSupervisor());
-    console.log("Técnico " + this.auth.isTechnical());
   }
 
   getVisits() {
     this.http
       .get(environment.url + `/attentions/${this.doctor.icm}`)
       .subscribe(data => {
-        this.evaluations = data;
+        this.evaluations = data["data"];
+        let id = 1;
+        this.evaluations = _.map(this.evaluations, evaluation => {
+          evaluation.id = id;
+          id = id + 1;
+          return evaluation;
+        });
+        if (this.evaluations !== null) this.exists = true;
+        console.log(this.evaluations);
       });
   }
 }
