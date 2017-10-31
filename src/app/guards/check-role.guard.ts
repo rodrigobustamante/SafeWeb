@@ -15,7 +15,6 @@ export class CheckRoleGuard implements CanActivate {
   ): Observable<boolean> | Promise<boolean> | boolean {
     const allowedRoles = route.data["allowedRoles"];
     let user = JSON.parse(localStorage.getItem("user").toString());
-    console.log(user);
     if (user.role === undefined) {
       let rol = "Doctor";
       return allowedRoles.some(x => x === rol);

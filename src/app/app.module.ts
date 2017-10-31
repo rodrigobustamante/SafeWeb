@@ -51,6 +51,7 @@ import { RegisterExamComponent } from "./components/doctor/register-exam/registe
 import { RegisterMedicalVisitComponent } from "./components/doctor/register-medical-visit/register-medical-visit.component";
 import { DoctorGuard } from "./guards/roles/doctor.guard";
 import { MedicalVisitListComponent } from "./components/doctor/medical-visit-list/medical-visit-list.component";
+import { ShowMedicalVisitComponent } from "./components/doctor/show-medical-visit/show-medical-visit.component";
 
 // Servicios
 import { AuthService } from "./services/auth/auth.service";
@@ -186,6 +187,12 @@ const appRoutes: Routes = [
         data: { allowedRoles: ["Admin", "Supervisor"] }
       },
       {
+        path: "attention/:id",
+        component: ShowMedicalVisitComponent,
+        canActivate: [CheckRoleGuard],
+        data: { allowedRoles: ["Trabajador", "Doctor"] }
+      },
+      {
         path: "register-medical-visit",
         component: RegisterMedicalVisitComponent,
         canActivate: [CheckRoleGuard],
@@ -231,7 +238,8 @@ const appRoutes: Routes = [
     RegisterExamComponent,
     EditEvaluationComponent,
     RegisterMedicalVisitComponent,
-    MedicalVisitListComponent
+    MedicalVisitListComponent,
+    ShowMedicalVisitComponent
   ],
   imports: [
     BrowserModule,

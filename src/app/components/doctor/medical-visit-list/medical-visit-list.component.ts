@@ -26,6 +26,7 @@ export class MedicalVisitListComponent implements OnInit {
     this.dtOptions = {
       pagingType: "full_numbers",
       pageLength: 10,
+      columnDefs: [{ orderable: false, targets: 1 }],
       language: {
         processing: "Procesando...",
         lengthMenu: "Mostrar _MENU_ registros",
