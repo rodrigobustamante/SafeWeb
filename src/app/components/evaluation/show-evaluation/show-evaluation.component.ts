@@ -32,12 +32,12 @@ export class ShowEvaluationComponent implements OnInit {
     doc.setFontSize(20);
     doc.text(
       `Evaluación de ${this.evaluation.evaluationType.type} de la empresa ${this
-        .evaluation.customer.name}`, 20, 20);
+        .evaluation.customer.name}`, 20, 10);
     doc.setFontSize(20);
-    doc.text(`Fecha de la evaluacion: ${this.evaluation.date}.`, 20, 20);
-    doc.text("Observaciones:", 20, 20);
+    doc.text(`Fecha de la evaluacion: ${this.evaluation.evaluationDate}.`, 20, 20);
+    doc.text("Observaciones:", 20, 30);
     doc.setFontSize(16);
-    doc.text(`${this.evaluation.observation}.`, 20, 20);
+    doc.text(`${this.evaluation.observation}.`, 20, 40);
     doc.save(`${this.evaluation.customer.name}.pdf`);
   }
 }
