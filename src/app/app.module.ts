@@ -190,7 +190,13 @@ const appRoutes: Routes = [
         path: "attention/:id",
         component: ShowMedicalVisitComponent,
         canActivate: [CheckRoleGuard],
-        data: { allowedRoles: ["Trabajador", "Doctor"] }
+        data: { allowedRoles: ["Admin", "Supervisor", "Trabajador", "Doctor"] }
+      },
+      {
+        path: "register-exam/:id",
+        component: RegisterExamComponent,
+        canActivate: [CheckRoleGuard],
+        data: { allowedRoles: ["Doctor"] }
       },
       {
         path: "register-medical-visit",

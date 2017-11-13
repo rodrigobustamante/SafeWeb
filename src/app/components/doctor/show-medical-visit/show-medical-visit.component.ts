@@ -19,11 +19,10 @@ export class ShowMedicalVisitComponent implements OnInit {
     console.log(id);
     this.http.get(environment.url + `/attention/${id}`).subscribe(data => {
       this.attention = data["data"];
-      console.log(this.attention);
+      this.attention = this.attention[0];
     });
     this.http.get(environment.url + `/exams/${id}`).subscribe(data => {
       this.exams = data["data"];
-      console.log(this.exams);
     });
   }
 }

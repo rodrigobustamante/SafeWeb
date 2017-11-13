@@ -1,45 +1,93 @@
 <div class="container-fluid" style="margin-top: 50px;">
-    <div class="row justify-content-md-center">
-      <div class="col-md-6">
+  <div class="row justify-content-md-center">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title text-center">Atención médica de {{ attention?.employee.firstName }} {{ attention?.employee.lastName }}</h2>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Empresa</strong>
+                </span>
+              </div>
+              <div>
+                <span>
+                  {{ attention?.customer.name }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Fecha de atención</strong>
+                </span>
+              </div>
+              <div>
+                <span>
+                  {{ attention?.date | date:'dd/MM/yyyy' }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">ICM del médico tratante</strong>
+                </span>
+              </div>
+              <div>
+                <span>
+                  {{ attention?.icm }}
+                </span>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <span>
+                  <strong class="black">Cantidad de exámenes</strong>
+                </span>
+              </div>
+              <div>
+                <span>
+                  {{ exams?.length }}
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <br>
+      <h3 *ngIf="exams?.length > 0">Exámenes</h3>
+      <div *ngFor="let exam of exams">
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title text-center">Empresa {{ attention?.name }}</h2>
+            <h2 class="card-title text-center">{{ exam?.type.type }}</h2>
           </div>
           <div class="card-body">
             <ul class="list-group">
               <li class="list-group-item">
                 <div>
                   <span>
-                    <strong class="black">Rut</strong>
+                    <strong class="black">Fecha de exámen</strong>
                   </span>
                 </div>
                 <div>
                   <span>
-                    {{ attention?.rut }}
-                  </span>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <div>
-                  <span>
-                    <strong class="black">Dirección</strong>
-                  </span>
-                </div>
-                <div>
-                  <span>
-                    {{ attention?.address }}
+                    {{ exam?.date | date:'dd/MM/yyyy' }}
                   </span>
                 </div>
               </li>
               <li class="list-group-item">
                 <div>
                   <span>
-                    <strong class="black">Zona</strong>
+                    <strong class="black">Observación</strong>
                   </span>
                 </div>
                 <div>
                   <span>
-                    {{ attention?.zone_name }}
+                    {{ exam?.observation }}
                   </span>
                 </div>
               </li>
@@ -47,5 +95,8 @@
           </div>
         </div>
       </div>
+      <br>
+      <a *ngIf="attention?.state.state === 'Realizada'" href="" class="btn btn-primary btn-block">Agregar exámen</a>
     </div>
   </div>
+</div>
