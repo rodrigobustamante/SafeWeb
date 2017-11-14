@@ -207,7 +207,8 @@ const appRoutes: Routes = [
       {
         path: "medical-visit",
         component: MedicalVisitComponent,
-        canActivate: [DoctorGuard]
+        canActivate: [CheckRoleGuard],
+        data: { allowedRoles: ["Doctor"] }
       },
       {
         path: "medical-visit-list",

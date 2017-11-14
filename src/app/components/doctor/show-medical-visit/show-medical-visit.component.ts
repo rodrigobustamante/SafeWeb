@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { environment } from "../../../../environments/environment";
 import * as _ from "lodash";
 import { DoctorService } from "./../../../services/doctor/doctor.service";
+import { FlashMessagesService } from "angular2-flash-messages";
 
 @Component({
   selector: "app-show-medical-visit",
@@ -17,7 +18,8 @@ export class ShowMedicalVisitComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private service: DoctorService
+    private service: DoctorService,
+    private message: FlashMessagesService
   ) {}
 
   ngOnInit() {
@@ -48,7 +50,12 @@ export class ShowMedicalVisitComponent implements OnInit {
       doctor_email: doctor.email
     };
     this.service.acceptVisit(id, data).subscribe(data => {
-      console.log(data);
+      this.router.navigate(["doctors/medical-visit"]).then(() => {
+        this.message.show(`¡Has confirmado la atención médica!`, {
+          cssClass: "alert-success",
+          timeout: 5000
+        });
+      });
     });
   }
 
@@ -60,8 +67,13 @@ export class ShowMedicalVisitComponent implements OnInit {
       doctor_name: doctor.firstName + " " + doctor.lastName,
       doctor_email: doctor.email
     };
-    this.service.acceptVisit(id, data).subscribe(data => {
-      console.log(data);
+    this.service.rejectVisit(id, data).subscribe(data => {
+      this.router.navigate(["doctors/medical-visit"]).then(() => {
+        this.message.show(`¡Has rechazado la atención médica!`, {
+          cssClass: "alert-danger",
+          timeout: 5000
+        });
+      });
     });
   }
 }

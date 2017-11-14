@@ -42,7 +42,7 @@ export class RegisterExamComponent implements OnInit {
     };
     console.log(exam);
     this.doctor.createExam(exam).subscribe(data => {
-      console.log(data);
+      this.router.navigate([`doctors/attention/${this.attention_id}`]);
     });
   }
 }

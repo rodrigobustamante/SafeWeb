@@ -19,17 +19,19 @@
                     <th>Fecha</th>
                     <th>Empresa</th>
                     <th>Empleado</th>
+                    <th>Estado de la atención</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let evaluation of evaluations">
-                    <td>{{ evaluation.id }}</td>
+                    <td>{{ evaluation.index }}</td>
                     <td>{{ evaluation.date | date:'dd/MM/yyyy' }}</td>
                     <td>{{ evaluation.employee.firstName }} {{ evaluation.employee.lastName }}</td>
                     <td>{{ evaluation.customer.name }}</td>
+                    <td>{{ evaluation.state.state }}</td>
                     <td>
-                      <a href="">Ver</a>
+                      <a href="doctors/attention/{{ evaluation.id }}">Ver</a>
                     </td>
                   </tr>
                 </tbody>
