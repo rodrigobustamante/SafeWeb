@@ -43,7 +43,7 @@
                 </span>
               </div>
             </li>
-            <li class="list-group-item">
+            <li class="list-group-item" *ngIf="attention?.state.state === 'Realizada'">
               <div>
                 <span>
                   <strong class="black">Cantidad de exámenes</strong>
@@ -59,43 +59,47 @@
         </div>
       </div>
       <br>
-      <h3 *ngIf="exams?.length > 0">Exámenes</h3>
-      <div *ngFor="let exam of exams">
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title text-center">{{ exam?.type.type }}</h2>
-          </div>
-          <div class="card-body">
-            <ul class="list-group">
-              <li class="list-group-item">
-                <div>
-                  <span>
-                    <strong class="black">Fecha de exámen</strong>
-                  </span>
-                </div>
-                <div>
-                  <span>
-                    {{ exam?.date | date:'dd/MM/yyyy' }}
-                  </span>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <div>
-                  <span>
-                    <strong class="black">Observación</strong>
-                  </span>
-                </div>
-                <div>
-                  <span>
-                    {{ exam?.observation }}
-                  </span>
-                </div>
-              </li>
-            </ul>
+      <div *ngIf="exams?.length > 0 && attention?.state.state === 'Realizada'">
+        <h3>Exámenes</h3>
+        <div *ngFor="let exam of exams">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title text-center">{{ exam?.type.type }}</h2>
+            </div>
+            <div class="card-body">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <div>
+                    <span>
+                      <strong class="black">Fecha de examen</strong>
+                    </span>
+                  </div>
+                  <div>
+                    <span>
+                      {{ exam?.date | date:'dd/MM/yyyy' }}
+                    </span>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div>
+                    <span>
+                      <strong class="black">Observación</strong>
+                    </span>
+                  </div>
+                  <div>
+                    <span>
+                      {{ exam?.observation }}
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
       <br>
+      <button *ngIf="attention?.state.state === 'Creada'" (click)="onConfirm()" class="btn btn-primary btn-block">Aceptar visita médica</button>
+      <button *ngIf="attention?.state.state === 'Creada'" (click)="onReject()" class="btn btn-danger btn-block">Rechazar visita médica</button>
       <button *ngIf="attention?.state.state === 'Realizada'" (click)="onRegister()" class="btn btn-primary btn-block">Agregar examen</button>
     </div>
   </div>

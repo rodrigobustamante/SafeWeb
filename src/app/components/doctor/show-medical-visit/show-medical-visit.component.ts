@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute, Router } from "@angular/router";
 import { environment } from "../../../../environments/environment";
 import * as _ from "lodash";
+import { DoctorService } from "./../../../services/doctor/doctor.service";
 
 @Component({
   selector: "app-show-medical-visit",
@@ -15,7 +16,8 @@ export class ShowMedicalVisitComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private service: DoctorService
   ) {}
 
   ngOnInit() {
@@ -35,5 +37,31 @@ export class ShowMedicalVisitComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get("id");
     localStorage.setItem("attention_id", id);
     this.router.navigate(["doctors/register-exam"]);
+  }
+
+  onConfirm() {
+    let id = this.attention.id;
+    let doctor = JSON.parse(localStorage.getItem("user"));
+    let data = {
+      attention_date: this.attention.date,
+      doctor_name: doctor.firstName + " " + doctor.lastName,
+      doctor_email: doctor.email
+    };
+    this.service.acceptVisit(id, data).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  onReject() {
+    let id = this.attention.id;
+    let doctor = JSON.parse(localStorage.getItem("user"));
+    let data = {
+      attention_date: this.attention.date,
+      doctor_name: doctor.firstName + " " + doctor.lastName,
+      doctor_email: doctor.email
+    };
+    this.service.acceptVisit(id, data).subscribe(data => {
+      console.log(data);
+    });
   }
 }
