@@ -79,7 +79,7 @@ export class EvaluationListComponent implements OnInit {
       let id = 1;
       this.evaluations = _.map(this.evaluations, evaluation => {
         if (evaluation.customer.id === Number(this.user.customer.id)) {
-          evaluation.id = id;
+          evaluation.index = id;
           id = id + 1;
           return evaluation;
         }

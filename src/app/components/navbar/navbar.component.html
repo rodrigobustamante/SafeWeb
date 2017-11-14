@@ -26,11 +26,11 @@
           </div>
         </li>
         <li *ngIf="session && (auth.isAdmin() || auth.isSupervisor() || auth.isTechnical() || 
-          auth.isCompany())" class="nav-item dropdown">
+          auth.isCompany() || auth.isEngineer())" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="evaluations" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Evaluaciones</a>
           <div class="dropdown-menu" aria-labelledby="evaluations">
-            <a class="dropdown-item" *ngIf="auth.isAdmin() || auth.isSupervisor()" href="evaluations/create">Registrar evaluación</a>
-            <a class="dropdown-item" href="evaluations">Lista de evaluaciones</a>
+            <a class="dropdown-item" *ngIf="auth.isAdmin() || auth.isSupervisor() || auth.isTechnical()" href="evaluations/create">Registrar evaluación</a>
+            <a class="dropdown-item" *ngIf="auth.isAdmin() || auth.isSupervisor() || auth.isEngineer() || auth.isCompany()" href="evaluations">Lista de evaluaciones</a>
           </div>
         </li>
         <li *ngIf="session && (auth.isAdmin() || auth.isSupervisor() || auth.isCompany() || auth.isEmployee())" class="nav-item dropdown">

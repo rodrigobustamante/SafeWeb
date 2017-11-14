@@ -12,18 +12,18 @@
           <th>Empresa</th>
           <th>ICM del médico</th>
           <th>Estado</th>
-          <th>Acciones</th>
+          <th *ngIf="!auth.isCompany()">Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let visit of visits">
-          <td>{{ visit.id }}</td>
+          <td>{{ visit.index }}</td>
           <td>{{ visit.date | date:'dd/MM/yyyy' }}</td>
           <td>{{ visit.employee.firstName }} {{ visit.employee.lastName }}</td>
           <td>{{ visit.customer.name }}</td>
           <td>{{ visit.icm }}</td>
           <td>{{ visit.state.state }}</td>
-          <td>
+          <td *ngIf="!auth.isCompany()">
             <a href="doctors/attention/{{ visit.id }}">Ver</a>
           </td>
         </tr>

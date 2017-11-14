@@ -76,7 +76,7 @@ export class MedicalVisitListComponent implements OnInit {
       let id = 1;
       this.visits = _.map(this.visits, visit => {
         if (visit.customer.id === Number(this.user.customer.id)) {
-          visit.id = id;
+          visit.index = id;
           id = id + 1;
           return visit;
         }
@@ -93,7 +93,7 @@ export class MedicalVisitListComponent implements OnInit {
       let id = 1;
       this.visits = _.map(this.visits, visit => {
         if (visit.employee.id === Number(this.user.id)) {
-          visit.id = id;
+          visit.index = id;
           id = id + 1;
           return visit;
         }
