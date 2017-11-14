@@ -96,7 +96,7 @@
         </div>
       </div>
       <br>
-      <a *ngIf="attention?.state.state === 'Realizada'" href="" class="btn btn-primary btn-block">Agregar exámen</a>
+      <button *ngIf="attention?.state.state === 'Realizada'" (click)="onRegister()" class="btn btn-primary btn-block">Agregar examen</button>
     </div>
   </div>
 </div>

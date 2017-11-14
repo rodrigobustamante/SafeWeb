@@ -14,4 +14,12 @@ export class DoctorService {
       .post(environment.url + "/attentions", attention, { headers: headers })
       .map(res => res.json());
   }
+
+  createExam(exam) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    return this.http
+      .post(environment.url + "/exams", exam, { headers: headers })
+      .map(res => res.json());
+  }
 }

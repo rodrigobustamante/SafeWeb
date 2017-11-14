@@ -193,7 +193,7 @@ const appRoutes: Routes = [
         data: { allowedRoles: ["Admin", "Supervisor", "Trabajador", "Doctor"] }
       },
       {
-        path: "register-exam/:id",
+        path: "register-exam",
         component: RegisterExamComponent,
         canActivate: [CheckRoleGuard],
         data: { allowedRoles: ["Doctor"] }

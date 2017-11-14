@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { environment } from "../../../../environments/environment";
 import * as _ from "lodash";
 
@@ -12,7 +12,11 @@ import * as _ from "lodash";
 export class ShowMedicalVisitComponent implements OnInit {
   attention: any;
   exams: any;
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get("id");
@@ -24,5 +28,12 @@ export class ShowMedicalVisitComponent implements OnInit {
     this.http.get(environment.url + `/exams/${id}`).subscribe(data => {
       this.exams = data["data"];
     });
+  }
+
+  onRegister() {
+    localStorage.removeItem("attention_id");
+    let id = this.route.snapshot.paramMap.get("id");
+    localStorage.setItem("attention_id", id);
+    this.router.navigate(["doctors/register-exam"]);
   }
 }
