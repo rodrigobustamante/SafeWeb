@@ -62,8 +62,8 @@
                         {{ student.state.state }}
                       </td>
                       <td *ngIf="student.state.state === 'Registrado'" style="color:grey">
-                          {{ student.state.state }}
-                        </td>
+                        {{ student.state.state }}
+                      </td>
                     </tr>
                   </table>
                 </div>
@@ -80,6 +80,8 @@
           </ul>
         </div>
       </div>
+      <br>
+      <button *ngIf="aux" class="btn btn-primary btn-block" (click)="toPDF()">Generar certificado</button>
     </div>
   </div>
 </div>

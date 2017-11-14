@@ -25,6 +25,7 @@
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/moment/moment.js",        
         "../node_modules/datatables.net/js/jquery.dataTables.js",
         "../node_modules/datatables.net-buttons/js/dataTables.buttons.js",
         "../node_modules/datatables.net-buttons/js/buttons.colVis.js",
