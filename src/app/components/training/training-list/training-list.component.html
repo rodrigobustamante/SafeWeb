@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let training of trainings">
-          <td>{{ training.id }}</td>
+          <td>{{ training.index }}</td>
           <td>{{ training.date | date:'dd/MM/yyyy' }}</td>
           <td>{{ training.customer.name }}</td>
           <td>{{ training.expositor.firstName }} {{ training.expositor.last_name }}</td>

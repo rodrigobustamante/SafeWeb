@@ -86,7 +86,7 @@ export class TrainingListComponent implements OnInit {
       let id = 1;
       this.trainings = _.map(this.trainings, training => {
         if (training.customer.id === Number(this.user.customer.id)) {
-          training.id = id;
+          training.index = id;
           id = id + 1;
           return training;
         }
@@ -103,7 +103,7 @@ export class TrainingListComponent implements OnInit {
       let id = 1;
       this.trainings = _.map(this.trainings, training => {
         if (training.employee.id === Number(this.user.id)) {
-          training.id = id;
+          training.index = id;
           id = id + 1;
           return training;
         }

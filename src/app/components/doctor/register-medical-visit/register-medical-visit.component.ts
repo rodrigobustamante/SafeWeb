@@ -19,7 +19,12 @@ export class RegisterMedicalVisitComponent implements OnInit {
   doctors: any;
   employees: any;
   customer_id: any;
-  constructor(private router: Router, private http: HttpClient, private service: DoctorService) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private service: DoctorService,
+    private message: FlashMessagesService
+  ) {}
 
   ngOnInit() {
     this.loadCustomers();
@@ -64,13 +69,33 @@ export class RegisterMedicalVisitComponent implements OnInit {
 
   onRegister() {
     let attention = {
-      icm: this.icm, 
+      icm: this.icm,
       attention_date: this.date,
       employee_id: this.employee_id
-    }
-    this.service.createAttention(attention).subscribe(data => {
-      console.log(data)
-    })
-    //console.log("date " + this.date + " empleado" + this.employee_id + " icm:" + this.icm);
+    };
+    this.service.createAttention(attention).subscribe(
+      data => {
+        this.router
+          .navigate(["doctors/medical-visit-list"])
+          .then(() => {
+            this.message.show(`¡Visita médica registrada correctamente!`, {
+              cssClass: "alert-success",
+              timeout: 5000
+            });
+          })
+          .catch(err => {
+            this.message.show(`¡Error al ingresar la visita médica!`, {
+              cssClass: "alert-danger",
+              timeout: 5000
+            });
+          });
+      },
+      err => {
+        this.message.show(`¡Error al ingresar la visita médica!`, {
+          cssClass: "alert-success",
+          timeout: 5000
+        });
+      }
+    );
   }
 }

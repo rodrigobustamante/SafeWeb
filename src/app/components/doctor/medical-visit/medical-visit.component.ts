@@ -31,9 +31,10 @@ export class MedicalVisitComponent implements OnInit {
       .get(environment.url + `/attentions/${this.doctor.icm}`)
       .subscribe(data => {
         this.evaluations = data["data"];
+        console.log(this.evaluations);
         let id = 1;
         this.evaluations = _.map(this.evaluations, evaluation => {
-          evaluation.id = id;
+          evaluation.index = id;
           id = id + 1;
           return evaluation;
         });

@@ -16,13 +16,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let evaluation of evaluations">
-          <td>{{ evaluation.id }}</td>
+          <td>{{ evaluation.index }}</td>
           <td>{{ evaluation.evaluationDate }}</td>
           <td>{{ evaluation.employee.firstName }} {{ evaluation.employee.lastName }}</td>
           <td>{{ evaluation.customer.name }}</td>
           <td>{{ evaluation.evaluationType.type }}</td>
           <td>
             <a href="evaluations/{{ evaluation.id }}">Ver</a>
+            <a *ngIf="auth.isEngineer()" href="evaluations/{{ evaluation.id }}/edit">Editar</a>
           </td>
         </tr>
       </tbody>
