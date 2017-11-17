@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  url:  "http://e8351724.ngrok.io",
+  url:  "http://dd3cb458.ngrok.io",
   node: "http://localhost:8080"
 };
