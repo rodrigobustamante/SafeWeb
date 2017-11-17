@@ -46,11 +46,13 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem("user") !== null) {
       this.user = JSON.parse(localStorage.getItem("user"));
-      if (this.auth.isCompany()) this.getKPI();
+      if (this.auth.isCompany()) {
+        this.getKPI();
+        this.showCharts();
+      }
       this.employees = JSON.parse(localStorage.getItem("employees"));
       this.evaluations = JSON.parse(localStorage.getItem("evaluations"));
       this.trainings = JSON.parse(localStorage.getItem("trainings"));
-      this.showCharts();
     }
   }
 
