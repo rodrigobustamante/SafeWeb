@@ -10,6 +10,8 @@ import { LoadingModule } from "ngx-loading";
 import { FlashMessagesModule } from "angular2-flash-messages";
 import { HttpClientModule } from "@angular/common/http";
 import { DataTablesModule } from "angular-datatables";
+import { ChartsModule } from "ng2-charts";
+
 // Componentes
 
 // Autenticación
@@ -257,7 +259,8 @@ const appRoutes: Routes = [
     FlashMessagesModule,
     HttpClientModule,
     HttpModule,
-    DataTablesModule
+    DataTablesModule,
+    ChartsModule
   ],
   providers: [
     CheckRoleGuard,

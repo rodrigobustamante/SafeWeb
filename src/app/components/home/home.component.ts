@@ -17,6 +17,25 @@ export class HomeComponent implements OnInit {
   trainings: any;
   evaluations: any;
   employees: any;
+  barChartOptions: any = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true
+          }
+        }
+      ]
+    }
+  };
+  barChartType: string = "bar";
+  barChartLegend: boolean = true;
+  barChartData: any[] = [];
+  pieChartLabels: string[] = ["Personal", "Infraestructura"];
+  pieChartData: number[] = [];
+  pieChartType: string = "pie";
   constructor(
     private router: Router,
     private doctor: DoctorGuard,
@@ -31,14 +50,7 @@ export class HomeComponent implements OnInit {
       this.employees = JSON.parse(localStorage.getItem("employees"));
       this.evaluations = JSON.parse(localStorage.getItem("evaluations"));
       this.trainings = JSON.parse(localStorage.getItem("trainings"));
-      console.log(
-        "empl " +
-          this.employees +
-          ", eva " +
-          this.evaluations.terreno +
-          ", trai " +
-          this.trainings
-      );
+      this.showCharts();
     }
   }
 
@@ -56,14 +68,23 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  showCharts() {
+    if (
+      this.evaluations.personal !== undefined &&
+      this.evaluations.terreno !== undefined
+    ) {
+      this.pieChartData.push(
+        this.evaluations.personal,
+        this.evaluations.terreno
+      );
+      console.log(this.pieChartData);
+    }
+  }
+
   toPDF() {
     const doc = new pdf();
     doc.setFontSize(30);
-    doc.text(
-      `Informe de ${this.user.customer.name}`,
-      60,
-      13
-    );
+    doc.text(`Informe de ${this.user.customer.name}`, 60, 13);
     doc.setFontSize(15);
     doc.text(
       `La empresa ${this.user.customer.name} posee ${this
@@ -80,19 +101,20 @@ export class HomeComponent implements OnInit {
     );
     doc.text(`y ${this.evaluations.personal} son de personal.`, 20, 60);
     doc.text(
-      `La empresa ${this.user.customer.name}, tiene registrada las siguientes capacitaciones.`,
+      `La empresa ${this.user.customer
+        .name}, tiene registrada las siguientes capacitaciones.`,
       20,
       80
     );
     let aux = 90;
     this.trainings.forEach(element => {
-      doc.text(
-        `•${element.name}, realizada el día ${element.date}.`,
-        30,
-        aux
-      );
+      doc.text(`•${element.name}, realizada el día ${element.date}.`, 30, aux);
       aux = aux + 10;
     });
     doc.save(`${this.user.customer.name}.pdf`);
   }
+
+  public chartClicked(e: any): void {}
+
+  public chartHovered(e: any): void {}
 }
