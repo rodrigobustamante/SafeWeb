@@ -21,8 +21,12 @@
             <form *ngIf="customer_id && employees" (submit)="onRegister()">
               <hr>
               <div class="form-group">
-                <label for="date">Fecha</label>
-                <input [(ngModel)]="date" class="form-control" type="date" name="date" id="date">
+                <label for="employee_id">Empleado</label>
+                <select [(ngModel)]="employee_id" class="form-control" name="employee_id" id="employee_id">
+                  <option *ngFor="let employee of employees" value="{{ employee.id }}">
+                    {{ employee.firstName }} {{ employee.lastName }}
+                  </option>
+                </select>
               </div>
               <div class="form-group">
                 <label for="icm">Médico</label>
@@ -33,12 +37,8 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="employee_id">Empleado</label>
-                <select [(ngModel)]="employee_id" class="form-control" name="employee_id" id="employee_id">
-                  <option *ngFor="let employee of employees" value="{{ employee.id }}">
-                    {{ employee.firstName }} {{ employee.lastName }}
-                  </option>
-                </select>
+                <label for="date">Fecha</label>
+                <input [(ngModel)]="date" class="form-control" type="date" name="date" id="date">
               </div>
               <input type="submit" class="btn btn-lg btn-primary btn-block" value="Registrar visita médica" />
             </form>
