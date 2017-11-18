@@ -72,11 +72,11 @@ export class ShowTrainingComponent implements OnInit {
       20,
       30
     );
-    let mili = Number(momemt(this.training.date))
-    let date = momemt.unix(mili/1000).format("dd-MM-yyyy")
     doc.text(
-      `${this.training.date} por el expositor ${this.training.expositor
-        .first_name} ${this.training.expositor.last_name}`,
+      `${momemt(this.training.date).format(
+        "DD-MM-YY"
+      )}. por el expositor ${this.training.expositor.first_name} ${this.training
+        .expositor.last_name}`,
       20,
       40
     );

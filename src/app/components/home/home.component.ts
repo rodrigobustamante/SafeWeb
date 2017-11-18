@@ -17,25 +17,9 @@ export class HomeComponent implements OnInit {
   trainings: any;
   evaluations: any;
   employees: any;
-  barChartOptions: any = {
-    scaleShowVerticalLines: false,
-    responsive: true,
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true
-          }
-        }
-      ]
-    }
-  };
-  barChartType: string = "bar";
-  barChartLegend: boolean = true;
-  barChartData: any[] = [];
-  pieChartLabels: string[] = ["Personal", "Infraestructura"];
+  pieChartLabels: string[];
   pieChartData: number[] = [];
-  pieChartType: string = "pie";
+  pieChartType: string = "doughnut";
   constructor(
     private router: Router,
     private doctor: DoctorGuard,
@@ -48,11 +32,7 @@ export class HomeComponent implements OnInit {
       this.user = JSON.parse(localStorage.getItem("user"));
       if (this.auth.isCompany()) {
         this.getKPI();
-        this.showCharts();
       }
-      this.employees = JSON.parse(localStorage.getItem("employees"));
-      this.evaluations = JSON.parse(localStorage.getItem("evaluations"));
-      this.trainings = JSON.parse(localStorage.getItem("trainings"));
     }
   }
 
@@ -61,12 +41,11 @@ export class HomeComponent implements OnInit {
       .get(`${environment.url}/kpi/${this.user.customer.id}`)
       .subscribe(data => {
         console.log(data);
-        localStorage.setItem("employees", JSON.stringify(data["employees"]));
-        localStorage.setItem(
-          "evaluations",
-          JSON.stringify(data["evaluations"])
-        );
-        localStorage.setItem("trainings", JSON.stringify(data["trainings"]));
+        this.employees = data["employees"];
+        this.evaluations = data["evaluations"];
+        this.trainings = data["trainings"];
+        console.log(this.employees, this.evaluations, this.trainings);
+        this.showCharts();
       });
   }
 
@@ -79,8 +58,9 @@ export class HomeComponent implements OnInit {
         this.evaluations.personal,
         this.evaluations.terreno
       );
-      console.log(this.pieChartData);
+      this.pieChartLabels = ["Personal", "Infraestructura"];
     }
+    console.log(this.pieChartData);
   }
 
   toPDF() {
@@ -110,7 +90,13 @@ export class HomeComponent implements OnInit {
     );
     let aux = 90;
     this.trainings.forEach(element => {
-      doc.text(`•${element.name}, realizada el día ${element.date}.`, 30, aux);
+      doc.text(
+        `•${element.name}, realizada el día ${momemt(element.date).format(
+          "DD-MM-YY"
+        )}.`,
+        30,
+        aux
+      );
       aux = aux + 10;
     });
     doc.save(`${this.user.customer.name}.pdf`);
