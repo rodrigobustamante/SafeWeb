@@ -19,6 +19,7 @@ export class RegisterMedicalVisitComponent implements OnInit {
   doctors: any;
   employees: any;
   customer_id: any;
+  public loading = false;
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -73,29 +74,38 @@ export class RegisterMedicalVisitComponent implements OnInit {
       attention_date: this.date,
       employee_id: this.employee_id
     };
-    this.service.createAttention(attention).subscribe(
-      data => {
-        this.router
-          .navigate(["doctors/medical-visit-list"])
-          .then(() => {
-            this.message.show(`¡Visita médica registrada correctamente!`, {
-              cssClass: "alert-success",
-              timeout: 5000
+    let validate = this.service.validateRegisterMedicalVisit(attention);
+    if (validate != true) {
+      this.loading = false;
+      this.message.show(`¡${validate}!`, {
+        cssClass: "alert-danger",
+        timeout: 7000
+      });
+    } else {
+      this.service.createAttention(attention).subscribe(
+        data => {
+          this.router
+            .navigate(["doctors/medical-visit-list"])
+            .then(() => {
+              this.message.show(`¡Visita médica registrada correctamente!`, {
+                cssClass: "alert-success",
+                timeout: 5000
+              });
+            })
+            .catch(err => {
+              this.message.show(`¡Error al ingresar la visita médica!`, {
+                cssClass: "alert-danger",
+                timeout: 5000
+              });
             });
-          })
-          .catch(err => {
-            this.message.show(`¡Error al ingresar la visita médica!`, {
-              cssClass: "alert-danger",
-              timeout: 5000
-            });
+        },
+        err => {
+          this.message.show(`¡Error al ingresar la visita médica!`, {
+            cssClass: "alert-success",
+            timeout: 5000
           });
-      },
-      err => {
-        this.message.show(`¡Error al ingresar la visita médica!`, {
-          cssClass: "alert-success",
-          timeout: 5000
-        });
-      }
-    );
+        }
+      );
+    }
   }
 }

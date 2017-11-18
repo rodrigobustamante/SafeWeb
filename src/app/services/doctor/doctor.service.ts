@@ -43,5 +43,12 @@ export class DoctorService {
       .map(res => res.json());
   }
 
-  // Correo del supervisor, nombre y correo del doctor y fecha de atención
+  validateRegisterMedicalVisit(attention) {
+    if (attention.icm === undefined) return "Campo icm vacío";
+    if (attention.attention_date === undefined) return "Campo fecha vacío";
+    if (attention.attention_date <= moment().format("YYYY-MM-DD"))
+      return "La fecha no puede ser menor o igual al día actual";
+    if (attention.employee_id === undefined) return "Campo empleado vacío";
+    return true;
+  }
 }

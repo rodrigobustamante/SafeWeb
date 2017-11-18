@@ -66,6 +66,12 @@ export class MedicalVisitListComponent implements OnInit {
   getVisits() {
     this.http.get(environment.url + "/attentions").subscribe(data => {
       this.visits = data["data"];
+      let id = 1
+      this.visits = _.map(this.visits, visit => {
+        visit.index = id;
+        id = id + 1;
+        return visit;
+      });
       this.dtTrigger.next();
     });
   }
