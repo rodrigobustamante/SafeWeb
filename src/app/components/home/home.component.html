@@ -40,7 +40,7 @@
           </a>
         </div>
         <br>
-        <div class="row">
+        <div class="row" *ngIf="auth.isCompany()">
           <button (click)="toPDF()" class="btn btn-primary btn-block">Generar informe de la empresa</button>
         </div>
       </div>
