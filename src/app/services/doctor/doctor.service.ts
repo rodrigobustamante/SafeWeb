@@ -51,4 +51,13 @@ export class DoctorService {
     if (attention.employee_id === undefined) return "Campo empleado vacío";
     return true;
   }
+
+  validateRegisterExam(exam) {
+    if (exam.date === undefined) return "Campo fecha vacio";
+    if (exam.date <= moment().format("YYYY-MM-DD"))
+      return "La fecha no puede ser menor o igual al día actual";
+    if (exam.type === undefined) return "Campo tipo vacio";
+    if (exam.observation === undefined) return "Campo observación vacio";
+    return true;
+  }
 }

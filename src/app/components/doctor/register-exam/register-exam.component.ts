@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "./../../../../environments/environment";
 import { DoctorService } from "./../../../services/doctor/doctor.service";
+import { FlashMessagesService } from "angular2-flash-messages";
 
 @Component({
   selector: "app-register-exam",
@@ -15,10 +16,12 @@ export class RegisterExamComponent implements OnInit {
   type: any;
   types: any;
   observation: any;
+  public loading = false;
   constructor(
     private router: Router,
     private http: HttpClient,
-    private doctor: DoctorService
+    private doctor: DoctorService,
+    private message: FlashMessagesService
   ) {}
 
   ngOnInit() {
@@ -34,15 +37,26 @@ export class RegisterExamComponent implements OnInit {
   }
 
   onRegister() {
+    this.loading = true;
     let exam = {
       attention_id: this.attention_id,
       date: this.date,
       type: this.type,
       observation: this.observation
     };
-    console.log(exam);
-    this.doctor.createExam(exam).subscribe(data => {
-      this.router.navigate([`doctors/attention/${this.attention_id}`]);
-    });
+    let validate = this.doctor.validateRegisterExam(exam);
+    if (validate != true) {
+      this.loading = false;
+      this.message.show(`¡${validate}!`, {
+        cssClass: "alert-danger",
+        timeout: 7000
+      });
+    } else {
+      this.doctor.createExam(exam).subscribe(data => {
+        this.loading = false;
+        this.router.navigate([`doctors/attention/${this.attention_id}`]);
+      });
+    }
+    console.log(validate);
   }
 }
