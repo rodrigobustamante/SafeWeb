@@ -64,6 +64,7 @@ import { DoctorService } from "./services/doctor/doctor.service";
 // Guardias
 import { AuthGuard } from "./guards/auth.guard";
 import { CheckRoleGuard } from "./guards/check-role.guard";
+import { NotfoundComponent } from "./components/notfound/notfound.component";
 
 // Rutas
 const appRoutes: Routes = [
@@ -219,7 +220,10 @@ const appRoutes: Routes = [
         data: { allowedRoles: ["Admin", "Supervisor", "Empresa", "Trabajador"] }
       }
     ]
-  }
+  },
+
+  { path: "404", component: NotfoundComponent },
+  { path: "**", redirectTo: "/404" }
 ];
 
 @NgModule({
@@ -248,7 +252,8 @@ const appRoutes: Routes = [
     EditEvaluationComponent,
     RegisterMedicalVisitComponent,
     MedicalVisitListComponent,
-    ShowMedicalVisitComponent
+    ShowMedicalVisitComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
