@@ -1,27 +1,25 @@
-# Portafolio
+# Safe Web - Portafolio de título
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.3.
+Proyecto realizado como portafolio de título por alumnos de último año de **Duoc UC Sede Antonio Varas** egresados el año 2017.
 
-## Development server
+El equipo de desarrollo de este proyecto está conformado por:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1. [Rodrigo Bustamante](https://github.com/rodrigobustamante)
+2. [Hugo Soto](https://github.com/hsorellana)
 
-## Code scaffolding
+El proyecto consistía en el desarrollo de una plataforma de escritorio y una plataforma web para una *empresa* de auditorías en prevención de riesgos para empresas mineras.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+El proyecto se encuentra dividido en 3 repositorios:
 
-## Build
+1. [Aplicación de escritorio](https://github.com/hsorellana)
+2. [Aplicación web](https://github.com/rodrigobustamante)
+3. [API](https://github.com/hsorellana)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Para el desarrollo de este proyecto, se utilizaron las siguientes tecnologías:
 
-## Running unit tests
+1. Java 1.8
+2. Angular 4
+3. Node.js
+4. Oracle 11g
+5. MySql 5.7
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

@@ -5,6 +5,7 @@ import { environment } from "../../../../environments/environment";
 import * as _ from "lodash";
 import { DoctorService } from "./../../../services/doctor/doctor.service";
 import { FlashMessagesService } from "angular2-flash-messages";
+import { AuthService } from "../../../services/auth/auth.service";
 
 @Component({
   selector: "app-show-medical-visit",
@@ -19,7 +20,8 @@ export class ShowMedicalVisitComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private service: DoctorService,
-    private message: FlashMessagesService
+    private message: FlashMessagesService,
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
